@@ -1,44 +1,77 @@
 import java.lang.system;
 
-public class Stats {
-    protected double healthPoint;
-    protected double attack;
-    protected double defense;
-    protected double specialAttack;
-    protected double specialDefense;
-    protected double speed;
+public class Stats{
+	private double healthPoint;
+    private double attack;
+    private double defense;
+    private double specialAttack;
+    private double specialDefense;
+    private double speed;
 
-    public Stats(double healthPoint, double attack, double defense, double specialAttack, 
-                 double specialDefense, double speed) {
-        this.healthPoint = healthPoint;
-        this.attack = attack;
-        this.defense = defense;
-        this.specialAttack = specialAttack;
-        this.specialDefense = specialDefense;
-        this.speed = speed;
+    public Stats(double healthPoint, double attack, double defense, double specialAttack, double specialDefense, double speed){
+    	 this.healthPoint  = healthPoint;
+		 this.attack = attack;
+		 this.defense = defense;
+		 this.specialAttack = specialAttack;
+		 this.specialDefense = specialDefense;
+		 this.speed = speed;
     }
 
-    public double getHealthPoint() {
-        return this.healthPoint;
+    public double getHealthPoint(){
+    	return healthPoint;
+    }
+
+    public void setHealthPoint(double healthPoint){
+    	this.healthPoint  = healthPoint;
     }
 
     public double getAttack(){
-        return this.attack;
+    	return attack;
     }
 
+    public void setAttack(double attack){
+    	this.attack  = attack;
+    }    
+
     public double getDefense(){
-        return this.defense;
+    	return defense;
+    }
+
+    public void setDefense(double defense){
+    	this.defense  = defense;
     }
 
     public double getSpecialAttack(){
-        return this.specialAttack;
+    	return specialAttack;
+    }
+
+    public void setSpecialAttack(double specialAttack){
+    	this.specialAttack  = specialAttack;
     }
 
     public double getSpecialDefense(){
-        return this.specialDefense;
+    	return specialDefense;
     }
 
-    public double getSpeed(){
-        return this.speed;
+    public void setSpecialDefense(double specialDefense){
+    	this.specialDefense  = specialDefense;
     }
+
+	public double getSpeed(){
+    	return speed;
+    }
+
+    public void setSpeed(double speed){
+    	this.speed  = speed;
+    }
+
+    public void printStatus(){
+        System.out.println("Health Point: " + getHealthPoint());
+        System.out.println("Attack: " + getAttack());
+        System.out.println("Defense: " + getDefense());
+        System.out.println("Special Attack: " + getSpecialAttack());
+        System.out.println("Special Defense: " + getSpecialDefense());
+        System.out.println("Speed: " + getSpeed());   	
+    }
+
 }

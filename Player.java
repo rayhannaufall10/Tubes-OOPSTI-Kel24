@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+import java.util.List;
+
 public class Player {
     private int id;
     private String name;
@@ -7,6 +10,10 @@ public class Player {
         this.id = id;
         this.name = name;
         this.monsterList = monsterList;
+    }
+
+    public Player(String name) {
+        this.name = name;
     }
 
     public int getId() {

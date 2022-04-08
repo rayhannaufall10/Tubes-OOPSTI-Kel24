@@ -1,4 +1,5 @@
-import util.CSVReader.java;
+import util.CSVReader;
+import java.util.*;
 
 public class Effectivity {
     public class ElementTypePair {

@@ -37,7 +37,7 @@ public abstract class Move {
         this.name = name;
     }
 
-    public void setType(String type) {
+    public void setType(ElementType type) {
         this.type = type;
     }
 
@@ -61,7 +61,7 @@ public abstract class Move {
         return this.id;
     }
     
-    public void getMoveType(){
+    public String getMoveType(){
         return this.moveType;
     }
     public String getName(){
@@ -83,40 +83,49 @@ public abstract class Move {
     public int getAmmunition(){
         return this.ammunition;
     }
-
-    public void damageCalculation(Monster ourMonster, Monster enemyMonster){
-        int min = 85;
-        int max = 100;
-        double Damage;
-        double Effectivity = Effectivity.effectivity.getEffectivity(ourMonster.getElementType(), enemyMonster.getElementType());
-        double Burn;
-
-        // yang effect.getAttack itu bonus
-        if (ourMonster.getMoveType().equals("NORMAL") || ourMonster.getMoveType().equals("DEFAULT")){
-            double sourceAttack = effect.getAttack() * ourMonster.getStats().getAttack();
-            double targetDefense = enemyMonster.getStats().getDefense();
-            float randomValue = ((int)Math.floor(Math.random()*(max-min+1)+min)/100);
-            if (ourMonster.getStats().getStatusCondition().equals("BURN")){
-                Burn = 0.5;
-            }
-            else{
-                Burn = 1;
-            }
-            Damage = Math.floor((BasePower * (sourceAttack/targetDefense) + 2) * randomValue * Effectivity * Burn);
-        }
-        else if(ourMonster.getMoveType().equals("SPECIAL")){
-            double sourceAttack = effect.getAttack() * ourMonster.getStats().getSpecialAttack();
-            double targetDefense = enemyMonster.getStats().getSpecialDefense();
-            float randomValue = ((int)Math.floor(Math.random()*(max-min+1)+min)/100);
-            if (ourMonster.getStats().getStatusCondition().equals("BURN")){
-                Burn = 0.5;
-            }
-            else{
-                Burn = 1;
-            }
-            Damage = Math.floor((BasePower * (sourceAttack/targetDefense) + 2) * randomValue * Effectivity * Burn);
-        }
+    public String getTarget(){
+        return this.target;
     }
+
+    // public double damageCalculation(Monster ourMonster, Monster enemyMonster){
+    //     int min = 85;
+    //     int max = 100;
+    //     double Damage;
+    //     double e = Effectivity.effectivity.getEffectivity(this.type, enemyMonster.getElementType().get(0));
+    //     double Burn;
+
+    //     // yang effect.getAttack itu bonus
+    //     if (this.type == DEFAULT || this.type == NORMAL){
+    //         double sourceAttack = ourMonster.getStats().getAttack();
+    //         double targetDefense = enemyMonster.getStats().getDefense();
+    //         float randomValue = ((int)Math.floor(Math.random()*(max-min+1)+min)/100);
+    //         if (ourMonster.getStats().getStatusCondition() == BURN){
+    //             Burn = 0.5;
+    //         }
+    //         else{
+    //             Burn = 1;
+    //         }
+    //         Damage = Math.floor((BasePower * (sourceAttack/targetDefense) + 2) * randomValue * e * Burn);
+    //         return Damage;
+    //     }
+    //     else if(ourMonster.getMoveType().equals("SPECIAL")){
+    //         double sourceAttack = ourMonster.getStats().getSpecialAttack();
+    //         double targetDefense = enemyMonster.getStats().getSpecialDefense();
+    //         float randomValue = ((int)Math.floor(Math.random()*(max-min+1)+min)/100);
+    //         if (ourMonster.getStats().getStatusCondition().equals("BURN")){
+    //             Burn = 0.5;
+    //         }
+    //         else{
+    //             Burn = 1;
+    //         }
+    //         Damage = Math.floor((BasePower * (sourceAttack/targetDefense) + 2) * randomValue * e * Burn);
+    //         return Damage;
+    //     }
+
+    //     else{
+    //         continue;
+    //     }
+    // }
     public abstract void applyMove(Monster ourMonster, Monster enemyMonster);
 
 }

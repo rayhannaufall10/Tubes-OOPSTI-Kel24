@@ -1,7 +1,7 @@
 import java.util.List;
 import java.util.ArrayList;
 
-public class NormalMove {
+public class NormalMove extends Move {
     protected double BasePower;
 
     public NormalMove(int id, String moveType, String name, ElementType type, int accuracy, int priority, 
@@ -11,7 +11,7 @@ public class NormalMove {
     }
 
     public void applyMove(Monster ourMonster, Monster enemyMonster){
-        double damage = damageCalculation(ourMonster, enemyMonster);
+        double damage;
         Stats currentStats = enemyMonster.getStats();
         double attackEffect = currentStats.getHealthPoint() - damage;
         currentStats.setHealthPoint(attackEffect);

@@ -1,7 +1,7 @@
 import java.util.List;
 import java.util.ArrayList;
 
-public class SpecialMove {
+public class SpecialMove extends Move{
     protected double BasePower;
 
     public SpecialMove(int id, String moveType, String name, ElementType type, int accuracy, int priority, 

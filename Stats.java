@@ -1,4 +1,4 @@
-import java.lang.system;
+import java.lang.System;
 
 public class Stats{
 	private double healthPoint;

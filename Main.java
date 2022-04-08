@@ -39,7 +39,37 @@ public class Main {
             System.out.println("1. Start Game");
             System.out.println("2. How to Play");
             System.out.println("3. Exit Game");
+
             Scanner scan = new Scanner(System.in);
+            System.out.println("select option :");
+
+            int select = scan.nextInt();
+            if (select == 1) {
+                System.out.printf("Enter player 1 name: ");
+                String playerName1 = scan.next();
+                Player playerOne = new Player(playerName1);
+                System.out.printf("Enter player 2 name: ");
+                String playername2 = scan.next();
+                Player playerTwo = new Player(playername2);
+                int player = 1;
+                boolean gameGoing = true;
+                Player currPlayer;
+                while (gameGoing = true) {
+                    currPlayer = player == 1 ? playerOne : playerTwo;
+                    System.out.println("Menu :");
+
+                    if (player == 1) {
+                        player = 2;
+                    } else if (player == 2) {
+                        // TODO : Do action such as using both player moves
+                        player = 3;
+
+                    } else {
+                        player = 1;
+                    }
+                }
+
+            }
         }
     }
 }

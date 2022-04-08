@@ -60,7 +60,10 @@ public class Player {
         if (selected > this.currentMonster.getSkillsLenght() || selected <= 0) {
             this.selectMove();
         } else {
-            this.currentMonster.setMove(selected - 1);
+            if (!this.currentMonster.setMove(selected - 1)) {
+                System.out.println("there is no ammunition left. choose another move");
+                this.selectMove();
+            }
         }
     }
 
@@ -74,4 +77,5 @@ public class Player {
         }
         System.out.println("---------------------------");
     }
+
 }

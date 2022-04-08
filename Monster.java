@@ -1,3 +1,5 @@
+import java.util.List;
+
 public class Monster {
     private int id;
     private String name;
@@ -5,18 +7,21 @@ public class Monster {
     private Stats baseStats;
     private List<Move> moves = new ArrayList<Move>();
     int selectedMove = -1;
+    private StatusCondition statusCondition;
 
     public Monster() {
         baseStats = new Stats();
     }
 
     public Monster(int id, String name, List<ElementType> elementTypes, double healthPoint, double attack,
-            double defense, double specialAttack, double specialDefense, double speed, List<Move> moves) {
+            double defense, double specialAttack, double specialDefense, double speed, List<Move> moves
+            StatusCondition statusCondition) {
         this.id = id;
         this.name = name;
         this.elementTypes = elementTypes;
         this.baseStats = new Stats(healthPoint, attack, defense, specialAttack, specialDefense, speed);
         this.moves = moves;
+        this.statusCondition = statusCondition;
     }
 
     public Monster(int id, String name, double healthPoint, double attack, double defense, double specialAttack,
@@ -58,8 +63,20 @@ public class Monster {
         return this.moves.size();
     }
 
-    public void setMove(int selectedMove) {
+    public boolean setMove(int selectedMove) {
+        if (moves.get(selectedMove).ammunition <= 0) {
+            return false;
+        }
         this.selectedMove = selectedMove;
+        return true;
+    }
+
+    public void setStatusCondition(StatusCondition statusCondition) {
+        this.statusCondition = statusCondition;
+    }
+
+    public StatusCondition getStatusCondition() {
+        return this.statusCondition;
     }
 
     public Move getMove() {

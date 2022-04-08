@@ -31,5 +31,15 @@ public class Main {
                 // do nothing
             }
         }
+
+        boolean isActive = true;
+        while (isActive) {
+            System.out.println("Welcome to ^o^");
+            System.out.println("Menus :");
+            System.out.println("1. Start Game");
+            System.out.println("2. How to Play");
+            System.out.println("3. Exit Game");
+            Scanner scan = new Scanner(System.in);
+        }
     }
 }

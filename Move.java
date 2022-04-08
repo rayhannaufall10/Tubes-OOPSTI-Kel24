@@ -10,10 +10,10 @@ public abstract class Move {
     protected int priority;
     protected int ammunition;
     protected String target;
-    protected EffectMove effect;
+    //protected EffectMove effect;
 
     public Move(int id, String moveType, String name, ElementType type, int accuracy, int priority, 
-                int ammunition, String target, EffectMove effect) {
+                int ammunition, String target) {//EffectMove effect) {
         this.id = id;
         this.moveType = moveType;
         this.name = name;
@@ -22,7 +22,7 @@ public abstract class Move {
         this.priority = priority;
         this.ammunition = ammunition;
         this.target = target;
-        this.effect = effect;
+        //this.effect = effect;
     }
 
     public void setId(int id) {
@@ -68,19 +68,19 @@ public abstract class Move {
         return this.name;
     }
 
-    public ElementType type(){
+    public ElementType getType(){
         return this.type;
     }
 
-    public int accuracy(){
+    public int getAccuracy(){
         return this.accuracy;
     }
 
-    public int priority(){
+    public int getPriority(){
         return this.priority;
     }
 
-    public int ammunition(){
+    public int getAmmunition(){
         return this.ammunition;
     }
 
@@ -92,7 +92,7 @@ public abstract class Move {
         double Burn;
 
         // yang effect.getAttack itu bonus
-        if (ourMonster.getMoveType().equals("NORMAL")){
+        if (ourMonster.getMoveType().equals("NORMAL") || ourMonster.getMoveType().equals("DEFAULT")){
             double sourceAttack = effect.getAttack() * ourMonster.getStats().getAttack();
             double targetDefense = enemyMonster.getStats().getDefense();
             float randomValue = ((int)Math.floor(Math.random()*(max-min+1)+min)/100);
@@ -102,7 +102,7 @@ public abstract class Move {
             else{
                 Burn = 1;
             }
-            Damage = Math.floor(())
+            Damage = Math.floor((BasePower * (sourceAttack/targetDefense) + 2) * randomValue * Effectivity * Burn);
         }
         else if(ourMonster.getMoveType().equals("SPECIAL")){
             double sourceAttack = effect.getAttack() * ourMonster.getStats().getSpecialAttack();
@@ -114,6 +114,7 @@ public abstract class Move {
             else{
                 Burn = 1;
             }
+            Damage = Math.floor((BasePower * (sourceAttack/targetDefense) + 2) * randomValue * Effectivity * Burn);
         }
     }
     public abstract void applyMove(Monster ourMonster, Monster enemyMonster);

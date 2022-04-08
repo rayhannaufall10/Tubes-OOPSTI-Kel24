@@ -54,13 +54,14 @@ public class Player {
 
     }
 
-    public void selectMove(){
+    public void selectMove() {
         System.out.println("select move:");
         int selected = scan.nextInt();
-       // if (this.currentMonster.)
-       else {
-            this.currentMonster.setMove(selected -1);
-       }
+        if (selected > this.currentMonster.getSkillsLenght() || selected <= 0) {
+            this.selectMove();
+        } else {
+            this.currentMonster.setMove(selected - 1);
+        }
     }
 
     public void printMonsters() {

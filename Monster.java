@@ -54,6 +54,10 @@ public class Monster {
         moves.add(move);
     }
 
+    public int getSkillsLenght() {
+        return this.moves.size();
+    }
+
     public void setMove(int selectedMove) {
         this.selectedMove = selectedMove;
     }

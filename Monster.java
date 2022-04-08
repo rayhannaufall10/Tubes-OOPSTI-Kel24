@@ -1,5 +1,3 @@
-import java.util.List;
-
 public class Monster {
     private int id;
     private String name;
@@ -21,7 +19,7 @@ public class Monster {
         this.elementTypes = elementTypes;
         this.baseStats = new Stats(healthPoint, attack, defense, specialAttack, specialDefense, speed);
         this.moves = moves;
-        this.statusCondition = statusCondition;
+        this.statusCondition = "NONE";
     }
 
     public Monster(int id, String name, double healthPoint, double attack, double defense, double specialAttack,
@@ -59,23 +57,15 @@ public class Monster {
         moves.add(move);
     }
 
-    public int getSkillsLenght() {
-        return this.moves.size();
-    }
-
-    public boolean setMove(int selectedMove) {
-        if (moves.get(selectedMove).ammunition <= 0) {
-            return false;
-        }
+    public void setMove(int selectedMove) {
         this.selectedMove = selectedMove;
-        return true;
     }
 
     public void setStatusCondition(StatusCondition statusCondition) {
         this.statusCondition = statusCondition;
     }
 
-    public StatusCondition getStatusCondition() {
+    public void getStatusCondition() {
         return this.statusCondition;
     }
 

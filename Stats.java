@@ -21,6 +21,9 @@ public class Stats{
     	return healthPoint;
     }
 
+    public double getMaxHealth(){
+        return healthPoint;
+    }
     public void setHealthPoint(double healthPoint){
     	this.healthPoint  = healthPoint;
     }

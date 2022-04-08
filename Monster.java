@@ -5,18 +5,21 @@ public class Monster {
     private Stats baseStats;
     private List<Move> moves = new ArrayList<Move>();
     int selectedMove = -1;
+    private StatusCondition statusCondition;
 
     public Monster() {
         baseStats = new Stats();
     }
 
     public Monster(int id, String name, List<ElementType> elementTypes, double healthPoint, double attack,
-            double defense, double specialAttack, double specialDefense, double speed, List<Move> moves) {
+            double defense, double specialAttack, double specialDefense, double speed, List<Move> moves
+            StatusCondition statusCondition) {
         this.id = id;
         this.name = name;
         this.elementTypes = elementTypes;
         this.baseStats = new Stats(healthPoint, attack, defense, specialAttack, specialDefense, speed);
         this.moves = moves;
+        this.statusCondition = statusCondition;
     }
 
     public Monster(int id, String name, double healthPoint, double attack, double defense, double specialAttack,
@@ -58,6 +61,9 @@ public class Monster {
         this.selectedMove = selectedMove;
     }
 
+    public void getStatusCondition(StatusCondition statusCondition) {
+        return this.statusCondition;
+    }
     public Move getMove() {
         try {
             return this.currentMonster.setMove(selected - 1);

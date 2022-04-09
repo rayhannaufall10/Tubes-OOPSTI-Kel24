@@ -1,10 +1,10 @@
 import java.util.List;
 import java.util.ArrayList;
 
-public class NormalMove extends Move {
+public class NormalMoves extends Move {
     protected double BasePower;
 
-    public NormalMove(int id, String moveType, String name, ElementType type, int accuracy, int priority, 
+    public NormalMoves(int id, String moveType, String name, ElementType type, int accuracy, int priority, 
                       int ammunition, String target, double BasePower) {
         super(id, moveType, name, type, accuracy, priority, ammunition, target);
         this.BasePower = BasePower;

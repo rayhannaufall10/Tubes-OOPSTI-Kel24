@@ -14,6 +14,13 @@ public class Monster {
         baseStats = stats;
     }
 
+    public Monster(int id, String name, List<ElementType> elementTypes, Stats stats, List<Move> moves) {
+        this.id = id;
+        this.name = name;
+        this.elementTypes = elementTypes;
+        this.moves = moves;
+        this.statusCondition = StatusCondition.NONE;
+    }
     public Monster(int id, String name, List<ElementType> elementTypes, double healthPoint, double attack,
             double defense, double specialAttack, double specialDefense, double speed, List<Move> moves,
             StatusCondition statusCondition) {

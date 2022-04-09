@@ -1,17 +1,16 @@
 import java.util.List;
 import java.util.ArrayList;
-import java.util.Random;
 
-public class DefaultMove extends Move{
+public class SpecialMoves extends Move{
     protected double BasePower;
 
-    public DefaultMove(int id, String moveType, String name, ElementType type, int accuracy, int priority, 
+    public SpecialMoves(int id, String moveType, String name, ElementType type, int accuracy, int priority, 
                       int ammunition, String target, double BasePower) {
-        super(1, "DEFAULT", "Default Move", ElementType.NORMAL, 100, 0, 999, "ENEMY");
-        this.BasePower = 50;
+        super(id, moveType, name, type, accuracy, priority, ammunition, target);
+        this.BasePower = BasePower;
     }
 
-    public void applyMove(Monster ourMonster, Monster enemyMonster) {
+    public void applyMove(Monster ourMonster, Monster enemyMonster){
         // Menghitung Effectivity Type
         double e = Effectivity.effectivity.getEffectivity(this.type, enemyMonster.getElementType().get(0));
         
@@ -31,8 +30,8 @@ public class DefaultMove extends Move{
 
         // Menghitung Damage Calculation
         double damage;
-        double sourceAttack = ourMonster.getStats().getAttack();
-        double targetDefense = enemyMonster.getStats().getDefense();
+        double sourceAttack = ourMonster.getStats().getSpecialAttack();
+        double targetDefense = enemyMonster.getStats().getSpecialDefense();
         damage = Math.floor((BasePower * (sourceAttack / targetDefense) + 2) * randomValue * e * Burn);
 
         // Update Hasil Move
@@ -41,13 +40,5 @@ public class DefaultMove extends Move{
         currentStats.setHealthPoint(attackEffect);
         enemyMonster.setStats(currentStats);
         this.ammunition = this.ammunition - 1;
-
-        // Self
-        Stats ourMonsterStats = ourMonster.getStats();
-        double updateOwnHP = Math.floor(ourMonsterStats.getMaxHealth() * 1 / 4);
-        double MonsterHealth = ourMonsterStats.getHealthPoint();
-        double currentHealth = MonsterHealth - updateOwnHP;
-        ourMonsterStats.setHealthPoint(currentHealth);
-        setAmmunition(getAmmunition() - 1);
     }
 }

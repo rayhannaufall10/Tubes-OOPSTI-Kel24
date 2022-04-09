@@ -1,11 +1,11 @@
 import java.util.List;
 import java.util.ArrayList;
 
-public class StatusMove extends Move {
+public class StatusMoves extends Move {
     protected String Effect;
     int[] EffectPoint;
 
-    public StatusMove(int id, String moveType, String name, ElementType type, int accuracy, int priority, 
+    public StatusMoves(int id, String moveType, String name, ElementType type, int accuracy, int priority, 
                       int ammunition, String target, String effect, int[] effectPoint){
         super(id, moveType, name, type, accuracy, priority, ammunition, target);
         this.Effect = effect;

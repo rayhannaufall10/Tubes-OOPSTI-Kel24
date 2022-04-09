@@ -4,12 +4,12 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Main {
     private static final List<String> CSV_FILE_PATHS = Collections.unmodifiableList(Arrays.asList(
             "configs/monsterpool.csv",
-            "configs/movepool.csv",
-            "configs/element-type-effectivity-chart.csv"));
+            "configs/movepool.csv"));
 
     public static void main(String[] args) {
         for (String fileName : CSV_FILE_PATHS) {
@@ -18,13 +18,14 @@ public class Main {
                 CSVReader reader = new CSVReader(new File(Main.class.getResource(fileName).toURI()), ";");
                 reader.setSkipHeader(true);
                 List<String[]> lines = reader.read();
-                System.out.println("=========== CONTENT START ===========");
+                System.out.println("=========== CONTENT START ===========\n");
                 for (String[] line : lines) {
                     for (String word : line) {
                         System.out.printf("%s ", word);
                     }
                     System.out.println();
                 }
+                System.out.println();
                 System.out.println("=========== CONTENT END ===========");
                 System.out.println();
             } catch (Exception e) {

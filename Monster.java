@@ -48,6 +48,10 @@ public class Monster {
         elementTypes.add(el);
     }
 
+    public void setStats(Stats stats) {
+        this.baseStats = stats;
+    }
+
     public Stats getStats() {
         return baseStats;
     }
@@ -79,14 +83,10 @@ public class Monster {
             return null;
         }
     }
-    /*
-     * Move use = currentMonster.getMove();
-     * if (user != null) {
-     * if use.getMoveType().equals("DEFAULT"){
-     * use
-     * }
-     * }
-     */
+
+    public int getMovesLenght(){
+        return moves.size();
+    }
 
     public void ChangeMonster() {
         this.selectedMove = -1;

@@ -10,7 +10,6 @@ public abstract class Move {
     protected int priority;
     protected int ammunition;
     protected String target;
-    //protected EffectMove effect;
 
     public Move(int id, String moveType, String name, ElementType type, int accuracy, int priority, 
                 int ammunition, String target) {//EffectMove effect) {
@@ -86,46 +85,7 @@ public abstract class Move {
     public String getTarget(){
         return this.target;
     }
-
-    // public double damageCalculation(Monster ourMonster, Monster enemyMonster){
-    //     int min = 85;
-    //     int max = 100;
-    //     double Damage;
-    //     double e = Effectivity.effectivity.getEffectivity(this.type, enemyMonster.getElementType().get(0));
-    //     double Burn;
-
-    //     // yang effect.getAttack itu bonus
-    //     if (this.type == DEFAULT || this.type == NORMAL){
-    //         double sourceAttack = ourMonster.getStats().getAttack();
-    //         double targetDefense = enemyMonster.getStats().getDefense();
-    //         float randomValue = ((int)Math.floor(Math.random()*(max-min+1)+min)/100);
-    //         if (ourMonster.getStats().getStatusCondition() == BURN){
-    //             Burn = 0.5;
-    //         }
-    //         else{
-    //             Burn = 1;
-    //         }
-    //         Damage = Math.floor((BasePower * (sourceAttack/targetDefense) + 2) * randomValue * e * Burn);
-    //         return Damage;
-    //     }
-    //     else if(ourMonster.getMoveType().equals("SPECIAL")){
-    //         double sourceAttack = ourMonster.getStats().getSpecialAttack();
-    //         double targetDefense = enemyMonster.getStats().getSpecialDefense();
-    //         float randomValue = ((int)Math.floor(Math.random()*(max-min+1)+min)/100);
-    //         if (ourMonster.getStats().getStatusCondition().equals("BURN")){
-    //             Burn = 0.5;
-    //         }
-    //         else{
-    //             Burn = 1;
-    //         }
-    //         Damage = Math.floor((BasePower * (sourceAttack/targetDefense) + 2) * randomValue * e * Burn);
-    //         return Damage;
-    //     }
-
-    //     else{
-    //         continue;
-    //     }
-    // }
+    
     public abstract void applyMove(Monster ourMonster, Monster enemyMonster);
 
 }

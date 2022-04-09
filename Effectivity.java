@@ -1,5 +1,13 @@
 import util.CSVReader;
 import java.util.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.io.FileNotFoundException;
+
 
 public class Effectivity {
     public class ElementTypePair {
@@ -25,6 +33,9 @@ public class Effectivity {
         else if (name == "GRASS"){
             return ElementType.GRASS;
         }
+        else{
+            return ElementType.NONE;
+        }
     }
 
     private Effectivity() {
@@ -33,6 +44,7 @@ public class Effectivity {
 
     public static Effectivity effectivity = new Effectivity();
     private HashMap<ElementTypePair, Double> elements = new HashMap<ElementTypePair, Double>();
+
     void loadConfig(){ //filename must have fileName.csv extention
         List<String> dataList = new ArrayList<String>();
         String path = "./configs/" + "element-type-effectivity-chart.csv";

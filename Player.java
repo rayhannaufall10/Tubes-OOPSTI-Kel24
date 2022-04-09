@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class Player {
     private int id;
@@ -35,32 +36,31 @@ public class Player {
     // buat switch monster
     public void switchMonster() {
         this.printMonsters();
-        System.out.println("input id monster:");
+        System.out.println("Input Monster ID : ");
         try {
             int selected = scan.nextInt();
             Monster temporaryMonster = this.monsterList.get(selected - 1);
             if (temporaryMonster.getStats().getHealthPoint() <= 0) {
-                System.out.println("monster sudah mati");
+                System.out.printf("%s is Dead\n", temporaryMonster.getName());
                 this.switchMonster();
             } else {
-                System.out.println("monster sudah diganti");
+                System.out.println("Monster Switched");
                 this.currentMonster.ChangeMonster();
                 this.currentMonster = temporaryMonster;
             }
         } catch (Exception e) {
-            System.out.println("monster is unavailable");
+            System.out.println("Monster is unavailable");
             this.switchMonster();
         }
-
     }
 
     public void selectMove() {
-        System.out.println("select move:");
+        System.out.println("Select Move : ");
         int selected = scan.nextInt();
-        if (selected > this.currentMonster.getSkillsLenght() || selected <= 0) {
+        if (selected >= this.currentMonster.getMovesLenght() || selected <= 0) {
             this.selectMove();
         } else {
-            if (!this.currentMonster.setMove(selected - 1)) {
+            if (this.currentMonster.getMove(selected - 1) == null) {
                 System.out.println("there is no ammunition left. choose another move");
                 this.selectMove();
             }
@@ -71,7 +71,7 @@ public class Player {
         int id = 0;
         System.out.println("*** Available Monsters ***");
         System.out.println("---------------------------");
-        for (Monster monster : monsters) {
+        for (Monster monster : monsterList){
             System.out.println("(" + String.valueOf(id + 1) + "]" + monster.getName());
             id++;
         }

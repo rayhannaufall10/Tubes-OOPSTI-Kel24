@@ -19,8 +19,8 @@ public class Interface {
             System.out.println("");
             Thread.sleep(2000);
             System.out.printf("Game Info Loaded");
-            Thread.sleep(2000);
             System.out.println("\n");
+            Thread.sleep(2000);
             System.out.println("=========== ENJOY THE GAME ===========");
             Thread.sleep(2000);
             System.out.print("\033[H\033[2J");
@@ -31,8 +31,25 @@ public class Interface {
         }                                                                     
     }
 
+    public static void newGame(){
+        try{
+            Thread.sleep(1000);
+            System.out.println("============================================================================================================\n");
+            System.out.println("    ███    ███  ██████  ███    ██ ███████ ████████ ███████ ██████      ███████  █████  ██   ██ ██    ██ ");
+            System.out.println("    ████  ████ ██    ██ ████   ██ ██         ██    ██      ██   ██     ██      ██   ██ ██  ██  ██    ██ ");
+            System.out.println("    ██ ████ ██ ██    ██ ██ ██  ██ ███████    ██    █████   ██████      ███████ ███████ █████   ██    ██ ");
+            System.out.println("    ██  ██  ██ ██    ██ ██  ██ ██      ██    ██    ██      ██   ██          ██ ██   ██ ██  ██  ██    ██ ");
+            System.out.println("    ██      ██  ██████  ██   ████ ███████    ██    ███████ ██   ██     ███████ ██   ██ ██   ██  ██████  ");
+            System.out.println("");
+            System.out.println("============================================================================================================");
+        }
+        catch(InterruptedException e){
+
+        }
+    }
     public static void main(String[] args){
         loadingGame();
+        newGame();
     }
 }
 

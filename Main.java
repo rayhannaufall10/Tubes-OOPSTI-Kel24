@@ -16,7 +16,7 @@ public class Main {
         // Interface Awal
         readConfig(CSV_FILE_PATHS.get(0));
         Interface.loadingGame();
-        
+
         boolean isActive = true;
         while (isActive) {
             System.out.println("Welcome to ^o^");
@@ -173,7 +173,7 @@ public class Main {
             }
         }
         catch (Exception e) {
-            System.out.println("Failed to Load Moves...");
+            System.out.println("Failed to Load Monster...");
         }
         return monsterList;
     }

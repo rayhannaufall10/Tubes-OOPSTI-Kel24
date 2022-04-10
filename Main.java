@@ -16,20 +16,15 @@ public class Main {
         // Interface Awal
         readConfig(CSV_FILE_PATHS.get(0));
         Interface.loadingGame();
+        Interface.newGame();
+        Interface.menuDisplay();
 
-        boolean isActive = true;
-        while (isActive) {
-            System.out.println("Welcome to ^o^");
-            System.out.println("Menus :");
-            System.out.println("1. Start Game");
-            System.out.println("2. How to Play");
-            System.out.println("3. Exit Game");
-
+        boolean Active = true;
+        while (Active) {
             Scanner scan = new Scanner(System.in);
-            System.out.println("select option :");
-
-            int select = scan.nextInt();
-            if (select == 1) {
+            
+            String input = scan.nextLine();
+            if (input == "START GAME") {
                 System.out.printf("Enter player 1 name: ");
                 String playerName1 = scan.next();
                 Player playerOne = new Player(playerName1);
@@ -52,6 +47,20 @@ public class Main {
                     } else {
                         player = 1;
                     }
+                }
+            }
+            else if(input == "HELP") {
+                
+            }
+            else{
+                try{
+                    Thread.sleep(1000);
+                    Interface.newGame();
+                    System.out.print("\033[H\033[2J");
+                    System.out.flush(); 
+                }
+                catch(InterruptedException e){
+                    
                 }
             }
         }

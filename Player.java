@@ -8,13 +8,13 @@ public class Player {
     private List<Monster> monsterList = new ArrayList<Monster>();
     private Monster currentMonster;
 
+
     Scanner scan = new Scanner(System.in);
 
     public Player(int id, String name, List<Monster> monsterList) {
         this.id = id;
         this.name = name;
         this.monsterList = monsterList;
-        this.currentMonster = monsterList.get(0);
     }
 
     public Player(String name) {
@@ -33,38 +33,12 @@ public class Player {
         return this.monsterList;
     }
 
-    // buat switch monster
-    public void switchMonster() {
-        this.printMonsters();
-        System.out.println("Input Monster ID : ");
-        try {
-            int selected = scan.nextInt();
-            Monster temporaryMonster = this.monsterList.get(selected - 1);
-            if (temporaryMonster.getStats().getHealthPoint() <= 0) {
-                System.out.printf("%s is Dead\n", temporaryMonster.getName());
-                this.switchMonster();
-            } else {
-                System.out.println("Monster Switched");
-                this.currentMonster.ChangeMonster();
-                this.currentMonster = temporaryMonster;
-            }
-        } catch (Exception e) {
-            System.out.println("Monster is unavailable");
-            this.switchMonster();
-        }
+    public void setCurrentMonster(Monster monster){
+        this.currentMonster = monster;
     }
 
-    public void selectMove() {
-        System.out.println("Select Move : ");
-        int selected = scan.nextInt();
-        if (selected >= this.currentMonster.getMovesLenght() || selected <= 0) {
-            this.selectMove();
-        } else {
-            if (this.currentMonster.getMove(selected - 1) == null) {
-                System.out.println("there is no ammunition left. choose another move");
-                this.selectMove();
-            }
-        }
+    public Monster getCurrentMonster() {
+        return this.currentMonster;
     }
 
     public void printMonsters() {
@@ -78,4 +52,12 @@ public class Player {
         System.out.println("---------------------------");
     }
 
+    public boolean isLose(){
+        return (monsterList.get(0).getStats().getHealthPoint() <=0 && 
+        monsterList.get(1).getStats().getHealthPoint() <=0 && 
+        monsterList.get(2).getStats().getHealthPoint() <=0 && 
+        monsterList.get(3).getStats().getHealthPoint() <=0 && 
+        monsterList.get(4).getStats().getHealthPoint() <=0 && 
+        monsterList.get(5).getStats().getHealthPoint() <=0);
+    }
 }

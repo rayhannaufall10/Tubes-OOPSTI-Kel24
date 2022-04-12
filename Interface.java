@@ -21,7 +21,7 @@ public class Interface {
             System.out.printf("Game Info Loaded");
             System.out.println("\n");
             Thread.sleep(2000);
-            System.out.println("=========== ENJOY THE GAME ===========");
+            System.out.println(" \\^o^/  ENJOY THE GAME  \\^o^/");
             Thread.sleep(2000);
             System.out.print("\033[H\033[2J");
             System.out.flush(); 
@@ -42,6 +42,7 @@ public class Interface {
             System.out.println("    ██      ██  ██████  ██   ████ ███████    ██    ███████ ██   ██     ███████ ██   ██ ██   ██  ██████  ");
             System.out.println("");
             System.out.println("============================================================================================================");
+            Thread.sleep(1000);
         }
         catch(InterruptedException e){
 
@@ -52,21 +53,45 @@ public class Interface {
         try{
             Thread.sleep(1000);
             System.out.println("");
-            System.out.println("======= MAIN MENU =======");
-            System.out.println("1. START GAME ");
-            System.out.println("2. HOW TO PLAY ");
-            System.out.println("1. EXIT GAME \n");
-            System.out.println("Select Option");
-            System.out.println("> ");
+            System.out.println(ANSI_CYAN + "Welcome To Monster Saku\n" + ANSI_RESET);
+            System.out.println(ANSI_RED + "1" + ANSI_RESET + ". START GAME ");
+            System.out.println(ANSI_RED + "2" + ANSI_RESET + ". HOW TO PLAY ");
+            System.out.println(ANSI_RED + "3" + ANSI_RESET + ". EXIT GAME \n");
         }
         catch(InterruptedException e){
 
         }
     }
 
-    public static void help(){
-        // TODO LIST : Masukin ASCII HELP
+    public static void startGame(){
+        try{
+            Thread.sleep(1000);
+            System.out.print("\033[H\033[2J");
+            System.out.flush(); 
+            System.out.println("=========================================================================================\n");
+            System.out.println("    ███████ ████████  █████  ██████  ████████      ██████   █████  ███    ███ ███████ ");
+            System.out.println("    ██         ██    ██   ██ ██   ██    ██        ██       ██   ██ ████  ████ ██      ");
+            System.out.println("    ███████    ██    ███████ ██████     ██        ██   ███ ███████ ██ ████ ██ █████   ");
+            System.out.println("         ██    ██    ██   ██ ██   ██    ██        ██    ██ ██   ██ ██  ██  ██ ██      ");
+            System.out.println("    ███████    ██    ██   ██ ██   ██    ██         ██████  ██   ██ ██      ██ ███████ ");
+            System.out.println("");
+            System.out.println("=========================================================================================");
+            System.out.println("\n");
+        }
+        catch(InterruptedException e){
 
+        }
+    }
+
+    public static void roundStart(){
+        System.out.println(ANSI_CYAN + "What Do You Want To Do\n" + ANSI_RESET);
+        System.out.println(ANSI_RED + "1" + ANSI_RESET + ". MOVE ");
+        System.out.println(ANSI_RED + "2" + ANSI_RESET + ". SWITCH ");
+        System.out.println(ANSI_RED + "3" + ANSI_RESET + ". VIEW MONSTER INFO ");
+        System.out.println(ANSI_RED + "3" + ANSI_RESET + ". VIEW GAME INFO\n");
+    }
+
+    public static void help(){
         System.out.printf(ANSI_RED + "\n> " + ANSI_RESET);
         System.out.println(ANSI_CYAN + "What is Monster Saku ?" + ANSI_RESET);
         System.out.println(" Monster Saku is a 2 player PvP game where each player will fight their 6 Monsters. ");
@@ -82,6 +107,7 @@ public class Interface {
         System.out.println(" 5. Kill all of your enemy's monsters to win the game!!");
 
         System.out.println("\nType " + ANSI_YELLOW + "BACK" + ANSI_RESET + " to return to Main Menu");
+        System.out.println("> ");
     }
 
     public static final String ANSI_RESET = "\u001B[1;0m";

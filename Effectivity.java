@@ -1,11 +1,6 @@
-import util.CSVReader;
+
 import java.util.*;
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 import java.io.FileNotFoundException;
 
 
@@ -46,7 +41,6 @@ public class Effectivity {
     private HashMap<ElementTypePair, Double> elements = new HashMap<ElementTypePair, Double>();
 
     void loadConfig(){ //filename must have fileName.csv extention
-        List<String> dataList = new ArrayList<String>();
         String path = "./configs/" + "element-type-effectivity-chart.csv";
         try {
             File myObj = new File(path);

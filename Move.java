@@ -1,6 +1,3 @@
-import java.util.List;
-import java.util.ArrayList;
-
 public abstract class Move {
     protected int id;
     protected String moveType;
@@ -21,7 +18,6 @@ public abstract class Move {
         this.priority = priority;
         this.ammunition = ammunition;
         this.target = target;
-        //this.effect = effect;
     }
 
     public void setId(int id) {

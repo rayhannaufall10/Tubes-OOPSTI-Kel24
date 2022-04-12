@@ -2,6 +2,7 @@ import java.lang.System;
 
 public class Stats{
 	private double healthPoint;
+    private double maxHealthPoint;
     private double attack;
     private double defense;
     private double specialAttack;
@@ -10,6 +11,7 @@ public class Stats{
 
     public Stats(double healthPoint, double attack, double defense, double specialAttack, double specialDefense, double speed){
     	 this.healthPoint  = healthPoint;
+         this.maxHealthPoint  = healthPoint;
 		 this.attack = attack;
 		 this.defense = defense;
 		 this.specialAttack = specialAttack;
@@ -22,8 +24,9 @@ public class Stats{
     }
 
     public double getMaxHealth(){
-        return healthPoint;
+        return maxHealthPoint;
     }
+    
     public void setHealthPoint(double healthPoint){
     	this.healthPoint  = healthPoint;
     }
@@ -69,12 +72,12 @@ public class Stats{
     }
 
     public void printStatus(){
-        System.out.println("Health Point: " + getHealthPoint());
-        System.out.println("Attack: " + getAttack());
-        System.out.println("Defense: " + getDefense());
-        System.out.println("Special Attack: " + getSpecialAttack());
-        System.out.println("Special Defense: " + getSpecialDefense());
-        System.out.println("Speed: " + getSpeed());   	
+        System.out.println("Health Point    : " + getHealthPoint());
+        System.out.println("Attack          : " + getAttack());
+        System.out.println("Defense         : " + getDefense());
+        System.out.println("Special Attack  : " + getSpecialAttack());
+        System.out.println("Special Defense : " + getSpecialDefense());
+        System.out.println("Speed           : " + getSpeed());   	
     }
 
 }

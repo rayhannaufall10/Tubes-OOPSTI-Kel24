@@ -9,10 +9,9 @@ public class Monster {
     private List<Move> moves = new ArrayList<Move>();
     int selectedMove = -1;
     private StatusCondition statusCondition;
-
-    public Monster(Stats stats) {
-        baseStats = stats;
-    }
+    private int sleepTime;
+    private boolean isMoveable;
+    private Move currentMove;
 
     public Monster(int id, String name, List<ElementType> elementTypes, Stats stats, List<Move> moves) {
         this.id = id;
@@ -20,23 +19,8 @@ public class Monster {
         this.elementTypes = elementTypes;
         this.moves = moves;
         this.statusCondition = StatusCondition.NONE;
-    }
-    public Monster(int id, String name, List<ElementType> elementTypes, double healthPoint, double attack,
-            double defense, double specialAttack, double specialDefense, double speed, List<Move> moves,
-            StatusCondition statusCondition) {
-        this.id = id;
-        this.name = name;
-        this.elementTypes = elementTypes;
-        this.baseStats = new Stats(healthPoint, attack, defense, specialAttack, specialDefense, speed);
-        this.moves = moves;
-        this.statusCondition = StatusCondition.NONE;
-    }
-
-    public Monster(int id, String name, double healthPoint, double attack, double defense, double specialAttack,
-            double specialDefense, double speed) {
-        this.id = id;
-        this.name = name;
-        this.baseStats = new Stats(healthPoint, attack, defense, specialAttack, specialDefense, speed);
+        this.sleepTime = 0;
+        this.isMoveable = true;
     }
 
     public int getId() {
@@ -83,19 +67,31 @@ public class Monster {
         return this.statusCondition;
     }
 
-    public Move getMove(int selected) {
-        try {
-            return moves.get(selected-1);
-        } catch (Exception e) {
-            return null;
-        }
+    public void setSleepTime(int sleepTime) {
+        this.sleepTime = sleepTime;
     }
 
+    public int getSleepTime() {
+        return this.sleepTime;
+    }
+
+    public void setIsMoveable(boolean isMoveable) {
+        this.isMoveable = isMoveable;
+    }
+
+    public boolean getIsMoveable() {
+        return this.isMoveable;
+    }
+    
     public int getMovesLenght(){
         return moves.size();
     }
 
-    public void ChangeMonster() {
-        this.selectedMove = -1;
+    public void setCurrentMove(Move move){
+        this.currentMove = move;
+    }
+
+    public Move getCurrentMove() {
+        return this.currentMove;
     }
 }

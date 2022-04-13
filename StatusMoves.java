@@ -12,7 +12,7 @@ public class StatusMoves extends Move {
         this.EffectPoint = effectPoint;
     }
 
-    public void applyMove(Monster ourMonster, Monster enemyMonster){
+    public void applyMove(Monster ourMonster, Monster enemyMonster, Effectivity effectivity){
         double randomAccuracy =  1 + (int)(Math.random() * ((100 - 1) + 1));
         if (randomAccuracy > super.getAccuracy()){
             System.out.printf("%s Attack Missed...", ourMonster.getName());
@@ -38,7 +38,7 @@ public class StatusMoves extends Move {
                 if (Effect.equals("SLEEP")){
                     int sleep = random.nextInt(7);
                     enemyMonster.setStatusCondition(StatusCondition.SLEEP);
-                    enemyMonster.setSleepTime(sleep);
+                    enemyMonster.setSleepTime(sleep + 1);
                     
                 }
             }

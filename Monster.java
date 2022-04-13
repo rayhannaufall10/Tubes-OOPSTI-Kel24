@@ -17,6 +17,7 @@ public class Monster {
         this.id = id;
         this.name = name;
         this.elementTypes = elementTypes;
+        this.baseStats = stats;
         this.moves = moves;
         this.statusCondition = StatusCondition.NONE;
         this.sleepTime = 0;
@@ -68,7 +69,12 @@ public class Monster {
     }
 
     public void setSleepTime(int sleepTime) {
-        this.sleepTime = sleepTime;
+        if(sleepTime < 0) {
+            this.sleepTime = 0;
+        }
+        else {
+            this.sleepTime = sleepTime;
+        }
     }
 
     public int getSleepTime() {

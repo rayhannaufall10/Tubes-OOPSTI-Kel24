@@ -57,6 +57,8 @@ public class Interface {
             System.out.println(ANSI_RED + "1" + ANSI_RESET + ". START GAME ");
             System.out.println(ANSI_RED + "2" + ANSI_RESET + ". HOW TO PLAY ");
             System.out.println(ANSI_RED + "3" + ANSI_RESET + ". EXIT GAME \n");
+            System.out.println("Select Option");
+            System.out.printf("\033[1;33m>\033[0m ");
         }
         catch(InterruptedException e){
 
@@ -88,7 +90,9 @@ public class Interface {
         System.out.println(ANSI_RED + "1" + ANSI_RESET + ". MOVE ");
         System.out.println(ANSI_RED + "2" + ANSI_RESET + ". SWITCH ");
         System.out.println(ANSI_RED + "3" + ANSI_RESET + ". VIEW MONSTER INFO ");
-        System.out.println(ANSI_RED + "3" + ANSI_RESET + ". VIEW GAME INFO\n");
+        System.out.println(ANSI_RED + "4" + ANSI_RESET + ". VIEW GAME INFO\n");
+        System.out.println("Select Option");
+        System.out.printf("\033[1;33m>\033[0m ");
     }
 
     public static void help(){
@@ -107,7 +111,7 @@ public class Interface {
         System.out.println(" 5. Kill all of your enemy's monsters to win the game!!");
 
         System.out.println("\nType " + ANSI_YELLOW + "BACK" + ANSI_RESET + " to return to Main Menu");
-        System.out.println("> ");
+        System.out.printf("> ");
     }
 
     public static final String ANSI_RESET = "\u001B[1;0m";

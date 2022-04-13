@@ -82,6 +82,6 @@ public abstract class Move {
         return this.target;
     }
     
-    public abstract void applyMove(Monster ourMonster, Monster enemyMonster);
+    public abstract void applyMove(Monster ourMonster, Monster enemyMonster, Effectivity effectivity);
 
 }

@@ -20,4 +20,4 @@ javac *.java
 ```
 java Main
 ```
-5. Enjoy The Game \^o^/
+5. Enjoy The Game \\^o^/

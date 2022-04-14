@@ -10,7 +10,7 @@ public class SpecialMoves extends Move{
     public void applyMove(Monster ourMonster, Monster enemyMonster, Effectivity effectivity){
         double randomAccuracy =  1 + (int)(Math.random() * ((100 - 1) + 1));
         if (randomAccuracy > super.getAccuracy()){
-            System.out.printf("%s Attack Missed...", ourMonster.getName());
+            System.out.printf("%s Attack Missed...\n", ourMonster.getName());
         }
         else {
             // Menghitung Effectivity Type
@@ -39,13 +39,7 @@ public class SpecialMoves extends Move{
             double sourceAttack = ourMonster.getStats().getSpecialAttack();
             double targetDefense = enemyMonster.getStats().getSpecialDefense();
             damage = Math.floor((BasePower * (sourceAttack / targetDefense) + 2) * randomValue * efective * Burn);
-            System.out.println(BasePower);
-            System.out.println(sourceAttack);
-            System.out.println(targetDefense);
-            System.out.println(randomValue);
-            System.out.println(efective);
-            System.out.println(Burn);
-            System.out.println(damage);
+
             // Update Hasil Move
             Stats currentStats = enemyMonster.getStats();
             double attackEffect = currentStats.getHealthPoint() - damage;

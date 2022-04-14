@@ -71,7 +71,7 @@ public class Player {
 
     public void printMonstersName() {
         int id = 0;
-        System.out.println("\n*** Available Monsters ***");
+        System.out.println("\n*** \033[1;33mAvailable Monsters\033[0m ***");
         System.out.println("---------------------------");
         for (Monster monster : monsterList){
             System.out.println("(" + String.valueOf(id + 1) + ") " + monster.getName());

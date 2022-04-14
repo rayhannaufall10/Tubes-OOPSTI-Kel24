@@ -39,7 +39,7 @@ public class StatusMoves extends Move {
                     int sleep = random.nextInt(7);
                     enemyMonster.setStatusCondition(StatusCondition.SLEEP);
                     enemyMonster.setSleepTime(sleep + 1);
-                    
+                    enemyMonster.setIsMoveable(false);
                 }
             }
         }

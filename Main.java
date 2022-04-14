@@ -61,12 +61,6 @@ public class Main {
         catch (Exception e) {
             System.out.println("Failed to Load Moves...");
         }
-        /*
-        for (Move move : moveList) {
-            System.out.println("ID  : " + move.getId());
-            System.out.println("Name    : " + move.getName());
-        }
-        */
         return moveList;
     }
         
@@ -113,14 +107,6 @@ public class Main {
                 }
                 Stats monStats = new Stats(arrayStats.get(0), arrayStats.get(1), arrayStats.get(2), 
                                     arrayStats.get(3), arrayStats.get(4), arrayStats.get(5));
-                /*
-                System.out.println("HP          : " + monStats.getHealthPoint());
-                System.out.println("Attack      : " + monStats.getAttack());
-                System.out.println("Defense     : " + monStats.getDefense());
-                System.out.println("Sp Attack   : " + monStats.getSpecialAttack());
-                System.out.println("Sp Defense  : " + monStats.getSpecialDefense());
-                System.out.println("Speed       : " + monStats.getSpeed());
-                */
 
                 // SET UP MOVE MILIK MONSTER
                 String move = line[4];
@@ -132,49 +118,11 @@ public class Main {
                     Move originMove = movePool.get(Integer.valueOf(arrOfMove[i]) - 1);
                     monsMove.add(originMove);
                 }
-                /*
-                for (Move moves : monsMove) {
-                    System.out.println("ID  : " + moves.getId());
-                    System.out.println("Name    : " + moves.getName());
-                }
-                */
 
                 // Create Monster Object
                 Monster monsterTemp = new Monster(id, name, elementTypes, monStats, monsMove);
                 monsterList.add(monsterTemp);
             }
-            /*
-            System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
-            int i = 0;
-            for(Monster monster : monsterList){
-                i++;
-                System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-                System.out.printf("Id monster \t: %s%n", i);
-                System.out.printf("Nama monster \t: %s%n", monster.getName());
-                List<ElementType> elementTypes = monster.getElementType();
-                for (ElementType elementType : elementTypes){
-                    if(elementType.equals(ElementType.NORMAL)){
-                        System.out.printf("Element Type \t: %s%n", ElementType.NORMAL);
-                    }
-                    else if(elementType.equals(ElementType.FIRE)){
-                        System.out.printf("Element Type \t: %s%n", ElementType.FIRE);
-                    }
-                    else if(elementType.equals(ElementType.WATER)){
-                        System.out.printf("Element Type \t: %s%n", ElementType.WATER);
-                    }   
-                    else if(elementType.equals(ElementType.GRASS)){
-                        System.out.printf("Element Type \t: %s%n", ElementType.GRASS);
-                    } 
-                }
-                System.out.println("Health Point    : ");
-                System.out.println("Attack          : " + monster.getStats().getAttack());
-                System.out.println("Defense         : " + monster.getStats().getDefense());
-                System.out.println("Special Attack  : " + monster.getStats().getSpecialAttack());
-                System.out.println("Special Defense : " + monster.getStats().getSpecialDefense());
-                System.out.println("Speed           : " + monster.getStats().getSpeed());   	
-            }
-            */
-
         }
         catch (Exception e) {
             System.out.println("Failed to Load Monster...");
@@ -231,8 +179,8 @@ public class Main {
             System.out.println("Failed to Load Effectivity...");
         }
 
-        //Interface.loadingGame();
-        //Interface.newGame();
+        Interface.loadingGame();
+        Interface.newGame();
         Interface.menuDisplay();
 
         boolean GameActive = true;
@@ -247,10 +195,10 @@ public class Main {
                 // Bagian Input Nama Pemain
                 System.out.printf("Enter player 1 name : ");
                 String playerName1 = scan.next();
-                System.out.printf("%nWelcome %s, Happy Monster Fighting :D\n", playerName1);
+                System.out.printf("Welcome %s, Happy Monster Fighting :D\n", playerName1);
                 System.out.printf("\nEnter player 2 name : ");
                 String playerName2 = scan.next();
-                System.out.printf("%nWelcome %s, Happy Monster Fighting :D\n\n", playerName2);
+                System.out.printf("Welcome %s, Happy Monster Fighting :D\n\n", playerName2);
 
                 Random random = new Random();
                 Integer countMonster = monsterList.size();
@@ -296,10 +244,12 @@ public class Main {
                 int randomFirst1 = random.nextInt(6);
                 player1.setCurrentMonster(player1Monster.get(randomFirst1));
                 player1.printMonstersName();
+                System.out.printf("And %s Is Your Current Monster\n\n", player1.getCurrentMonster().getName());
                 int randomFirst2 = random.nextInt(6);
                 player2.setCurrentMonster(player2Monster.get(randomFirst2));
                 System.out.printf("%s, This Is Your Monster", playerName2);
                 player2.printMonstersName();
+                System.out.printf("And %s Is Your Current Monster\n\n", player2.getCurrentMonster().getName());
                 
                 // Starting Round
                 boolean RoundActive = true;
@@ -310,11 +260,13 @@ public class Main {
                     
                     // Check Monster Status Condition Burn
                     if (player1.getCurrentMonster().getStatusCondition() == StatusCondition.BURN) {
+                        System.out.printf("%s Terkena Efek Burn\n", player1.getCurrentMonster().getName());
                         double newHealth1 = (player1.getCurrentMonster().getStats().getHealthPoint()) 
                                            - (player1.getCurrentMonster().getStats().getMaxHealth() * 1/8);
                         player1.getCurrentMonster().getStats().setHealthPoint(newHealth1);
                     }
                     else if (player2.getCurrentMonster().getStatusCondition() == StatusCondition.BURN) {
+                        System.out.printf("%s Terkena Efek Burn\n", player2.getCurrentMonster().getName());
                         double newHealth2 = (player2.getCurrentMonster().getStats().getHealthPoint()) 
                                            - (player2.getCurrentMonster().getStats().getMaxHealth() * 1/8);
                         player2.getCurrentMonster().getStats().setHealthPoint(newHealth2);
@@ -322,11 +274,13 @@ public class Main {
                     
                     // Check Monster Status Condition Poison
                     else if (player1.getCurrentMonster().getStatusCondition() == StatusCondition.POISON) {
+                        System.out.printf("%s Terkena Efek Poison\n", player1.getCurrentMonster().getName());
                         double newHealth1 = (player1.getCurrentMonster().getStats().getHealthPoint()) 
                                            - (player1.getCurrentMonster().getStats().getMaxHealth() * 1/16);
                         player1.getCurrentMonster().getStats().setHealthPoint(newHealth1);
                     }
                     else if (player2.getCurrentMonster().getStatusCondition() == StatusCondition.POISON) {
+                        System.out.printf("%s Terkena Efek Poison\n", player2.getCurrentMonster().getName());
                         double newHealth2 = (player2.getCurrentMonster().getStats().getHealthPoint()) 
                                            - (player2.getCurrentMonster().getStats().getMaxHealth() * 1/16);
                         player2.getCurrentMonster().getStats().setHealthPoint(newHealth2);
@@ -360,33 +314,37 @@ public class Main {
                     } 
                     else {
                         for (Monster monster1 : player1Monster) {
-                            monster1.setSleepTime(monster1.getSleepTime() - 1);
-                            if (monster1.getSleepTime() <= 0) {
-                                if (monster1.getStatusCondition() == StatusCondition.SLEEP) {
-                                    System.out.printf(" %s Woke Up\n", monster1.getName());
-                                    monster1.setStatusCondition(StatusCondition.NONE);
+                            if (monster1.getStats().getHealthPoint() > 0) {
+                                monster1.setSleepTime(monster1.getSleepTime() - 1);
+                                if (monster1.getSleepTime() <= 0) {
+                                    if (monster1.getStatusCondition() == StatusCondition.SLEEP) {
+                                        System.out.printf("%s Woke Up\n", monster1.getName());
+                                        monster1.setStatusCondition(StatusCondition.NONE);
+                                    }
+                                    else {
+                                        continue;
+                                    }
                                 }
-                                else {
-                                    continue;
+                                else{
+                                    System.out.printf("%s Is Still In A Deep Sleep\n", monster1.getName());
                                 }
-                            }
-                            else{
-                                System.out.printf(" %s Is Still In A Deep Sleep", monster1.getName());
                             }
                         }
-                        for (Monster monster2 : player2Monster){
-                            monster2.setSleepTime(monster2.getSleepTime() - 1);
-                            if (monster2.getSleepTime() <= 0) {
-                                if (monster2.getStatusCondition() == StatusCondition.SLEEP) {
-                                    System.out.printf(" %s Woke Up\n", monster2.getName());
-                                    monster2.setStatusCondition(StatusCondition.NONE);
+                        for (Monster monster2 : player2Monster) {
+                            if (monster2.getStats().getHealthPoint() > 0) {
+                                monster2.setSleepTime(monster2.getSleepTime() - 1);
+                                if (monster2.getSleepTime() <= 0) {
+                                    if (monster2.getStatusCondition() == StatusCondition.SLEEP) {
+                                        System.out.printf("%s Woke Up\n", monster2.getName());
+                                        monster2.setStatusCondition(StatusCondition.NONE);
+                                    }
+                                    else {
+                                        continue;
+                                    }
                                 }
-                                else {
-                                    continue;
+                                else{
+                                    System.out.printf("%s Still In A Deep Sleep\n", monster2.getName());
                                 }
-                            }
-                            else{
-                                System.out.printf(" %s Still In A Deep Sleep\n", monster2.getName());
                             }
                         }
                     }
@@ -397,7 +355,7 @@ public class Main {
                     // Player 1 Turn 
                     boolean p1Turn = true;
                     while(p1Turn) {
-                        System.out.println(" ------- PLAYER 1 TURN -------");
+                        System.out.println("------ \033[1;33mPLAYER 1 TURN\033[0m ------");
                         Interface.roundStart();
                         input1 = scan.nextInt();
                         if (input1 == 1){
@@ -406,7 +364,7 @@ public class Main {
                             for (Move move : player1.getCurrentMonster().getMoves()) {
                                 System.out.println("Id Move     : " + index1);
                                 System.out.println("Move Name   : " + move.getName());
-                                System.out.println(" ");
+                                System.out.println("-------------------------------");
                                 index1++;
                             }
                             boolean outOfAmmunition = false;
@@ -433,11 +391,11 @@ public class Main {
                                 System.out.printf("Switch Monster To : ");
                                 int ganti = scan.nextInt();
                                 if ((ganti > 6) || (ganti <= 0)){
-                                    System.out.printf("Input Monster Yang Bener!!!");
+                                    System.out.printf("Input Monster Yang Bener!!!\n");
                                 }
                                 else{
                                     if(player1.getMonsters().get(ganti-1).getStats().getHealthPoint() <= 0){
-                                        System.out.printf("Monster sudah mati");
+                                        System.out.printf("Monster sudah mati\n");
                                     }
                                     else{
                                         player1.setCurrentMonster(player1.getMonsters().get(ganti-1));
@@ -452,13 +410,12 @@ public class Main {
                             player1.printMonsters();
                         }
                         else if (input1 == 4) {
-                            System.out.printf("\nSekarang ada di ronde %d\n", countRound-1);
                             String playMonster = player1.getCurrentMonster().getName();
                             System.out.printf("Monster yang sedang bertarung adalah %s\n", playMonster);
                             System.out.println("Ini adalah list monster yang tersisa : ");
                             int id = 0;
                             for (Monster monster : player1Monster){
-                                if (monster.getStats().getHealthPoint() <= 0){
+                                if (monster.getStats().getHealthPoint() > 0){
                                     System.out.println("(" + String.valueOf(id + 1) + ") " + monster.getName());
                                 }    
                                 id++;
@@ -472,7 +429,7 @@ public class Main {
                     // Player 2 Turn
                     boolean p2Turn = true;
                     while(p2Turn) {
-                        System.out.println("\n------- PLAYER 2 TURN -------");
+                        System.out.println("\n------- \033[1;33mPLAYER 2 TURN\033[0m -------");
                         Interface.roundStart();
                         input2 = scan.nextInt();
                         if (input2 == 1){
@@ -481,7 +438,7 @@ public class Main {
                             for (Move move : player2.getCurrentMonster().getMoves()) {
                                 System.out.println("Id Move : " + index2);
                                 System.out.println("Move Name : " + move.getName());
-                                System.out.println(" ");
+                                System.out.println("-------------------------------");
                                 index2++;
                             }
                             boolean outOfAmmunition = false;
@@ -527,13 +484,12 @@ public class Main {
                             player2.printMonsters();
                         }
                         else if (input2 == 4){
-                            System.out.printf("Sekarang ada di ronde %d\n", countRound);
                             String playMonster = player2.getCurrentMonster().getName();
                             System.out.printf("Monster yang sedang bertarung adalah %s\n", playMonster);
                             System.out.println("Ini adalah list monster yang tersisa : ");
                             int id = 0;
                             for (Monster monster : player2Monster){
-                                if (monster.getStats().getHealthPoint() != 0){
+                                if (monster.getStats().getHealthPoint() > 0){
                                     System.out.println("(" + String.valueOf(id + 1) + ") " + monster.getName());
                                 }    
                                 id++;
@@ -548,138 +504,12 @@ public class Main {
                     if ((input1 == 1) && (input2 == 1)) {
                         int player1MovePriority = player1.getCurrentMonster().getCurrentMove().getPriority();
                         int player2MovePriority = player2.getCurrentMonster().getCurrentMove().getPriority();
-                        System.out.println(player1MovePriority);
-                        System.out.println(player2MovePriority);
                         Double player1Speed = player1.getCurrentMonster().getStats().getSpeed();
                         Double player2Speed = player2.getCurrentMonster().getStats().getSpeed();
-                        // Adu Priority 
-                        if((player1MovePriority > player2MovePriority) || ((player1MovePriority == player2MovePriority) && (player1Speed > player2Speed))) {
-                            // Player 1 Move First
-                            System.out.printf("%s's %s Attack %s's %s\n", player1.getName(), player1.getCurrentMonster().getName(), 
-                                             player2.getName(), player2.getCurrentMonster().getName());
-                            player1.getCurrentMonster().getCurrentMove().applyMove(player1.getCurrentMonster(), player2.getCurrentMonster(), listOfEffectivity);
-                            if (player2.getCurrentMonster().getStats().getHealthPoint() <= 0) {
-                                System.out.printf("%s is Fainted Out\n", player2.getCurrentMonster().getName());
-                                if (player2.isLose()) {
-                                    RoundActive = false;
-                                }
-                                else {
-                                    System.out.printf("Choose Your Next Monster : ");
-                                    int nextMonster = scan.nextInt();
-                                    while (player2.getMonsters().get(nextMonster - 1).getStats().getHealthPoint() <= 0) {
-                                        System.out.printf("%s Is Already Fainted Out\n", player2.getMonsters().get(nextMonster - 1).getName());
-                                        System.out.printf("Choose Monster Id : ");
-                                        nextMonster = scan.nextInt();
-                                    }
-                                    Monster newMonster = player2.getMonsters().get(nextMonster - 1);
-                                    player2.setCurrentMonster(newMonster);
-                                    System.out.printf("Go %s!!!\n", player2.getCurrentMonster().getName());
-                                }
-                            }
-                            else if (player1.getCurrentMonster().getStats().getHealthPoint() <= 0) {
-                                System.out.printf("%s is Fainted Out\n", player1.getCurrentMonster().getName());
-                                if (player1.isLose()) {
-                                    RoundActive = false;
-                                }
-                                else {
-                                    System.out.printf("Choose Your Next Monster : ");
-                                    int nextMonster = scan.nextInt();
-                                    while (player1.getMonsters().get(nextMonster - 1).getStats().getHealthPoint() <= 0) {
-                                        System.out.printf("%s Is Already Fainted Out\n", player1.getMonsters().get(nextMonster - 1).getName());
-                                        System.out.printf("Choose Monster Id : ");
-                                        nextMonster = scan.nextInt();
-                                    }
-                                    Monster newMonster = player1.getMonsters().get(nextMonster - 1);
-                                    player1.setCurrentMonster(newMonster);
-                                    System.out.printf("Go %s!!!\n", player1.getCurrentMonster().getName());
-                                }
-                            }
-                            else {
-                                System.out.printf("%s's %s Attack %s's %s\n", player2.getName(), player2.getCurrentMonster().getName(), 
-                                             player1.getName(), player1.getCurrentMonster().getName());
-                                player2.getCurrentMonster().getCurrentMove().applyMove(player2.getCurrentMonster(), player1.getCurrentMonster(), listOfEffectivity);
-                                if (player2.getCurrentMonster().getStats().getHealthPoint() <= 0) {
-                                    System.out.printf("%s is Fainted Out\n", player2.getCurrentMonster().getName());
-                                    if (player2.isLose()) {
-                                        RoundActive = false;
-                                    }
-                                    else {
-                                        System.out.printf("Choose Your Next Monster : ");
-                                        int nextMonster = scan.nextInt();
-                                        while (player2.getMonsters().get(nextMonster - 1).getStats().getHealthPoint() <= 0) {
-                                            System.out.printf("%s Is Already Fainted Out\n", player2.getMonsters().get(nextMonster - 1).getName());
-                                            System.out.printf("Choose Monster Id : ");
-                                            nextMonster = scan.nextInt();
-                                        }
-                                        Monster newMonster = player2.getMonsters().get(nextMonster - 1);
-                                        player2.setCurrentMonster(newMonster);
-                                        System.out.printf("Go %s!!!\n", player2.getCurrentMonster().getName());
-                                    }
-                                }
-                                else if (player1.getCurrentMonster().getStats().getHealthPoint() <= 0) {
-                                    System.out.printf("%s is Fainted Out\n", player1.getCurrentMonster().getName());
-                                    if (player1.isLose()) {
-                                        RoundActive = false;
-                                    }
-                                    else {
-                                        System.out.printf("Choose Your Next Monster : ");
-                                        int nextMonster = scan.nextInt();
-                                        while (player1.getMonsters().get(nextMonster - 1).getStats().getHealthPoint() <= 0) {
-                                            System.out.printf("%s Is Already Fainted Out\n", player1.getMonsters().get(nextMonster - 1).getName());
-                                            System.out.printf("Choose Monster Id : ");
-                                            nextMonster = scan.nextInt();
-                                        }
-                                        Monster newMonster = player1.getMonsters().get(nextMonster - 1);
-                                        player1.setCurrentMonster(newMonster);
-                                        System.out.printf("Go %s!!!\n", player1.getCurrentMonster().getName());
-                                    }
-                                }
-                            }
-                        }
-                        
-                        else if((player1MovePriority < player2MovePriority) || ((player1MovePriority == player2MovePriority) && (player1Speed < player2Speed))) {
-                            // Player 2 Move
-                            System.out.printf("%s's %s Attack %s's %s\n", player2.getName(), player2.getCurrentMonster().getName(), 
-                                             player1.getName(), player1.getCurrentMonster().getName());
-                            player2.getCurrentMonster().getCurrentMove().applyMove(player2.getCurrentMonster(), player1.getCurrentMonster(), listOfEffectivity);
-                            if (player2.getCurrentMonster().getStats().getHealthPoint() <= 0) {
-                                System.out.printf("%s is Fainted Out\n", player2.getCurrentMonster().getName());
-                                if (player2.isLose()) {
-                                    RoundActive = false;
-                                }
-                                else {
-                                    System.out.printf("Choose Your Next Monster : ");
-                                    int nextMonster = scan.nextInt();
-                                    while (player2.getMonsters().get(nextMonster - 1).getStats().getHealthPoint() <= 0) {
-                                        System.out.printf("%s Is Already Fainted Out\n", player2.getMonsters().get(nextMonster - 1).getName());
-                                        System.out.printf("Choose Monster Id : ");
-                                        nextMonster = scan.nextInt();
-                                    }
-                                    Monster newMonster = player2.getMonsters().get(nextMonster - 1);
-                                    player2.setCurrentMonster(newMonster);
-                                    System.out.printf("Go %s!!!\n", player2.getCurrentMonster().getName());
-                                }
-                            }
-                            else if (player1.getCurrentMonster().getStats().getHealthPoint() <= 0) {
-                                System.out.printf("%s is Fainted Out\n", player1.getCurrentMonster().getName());
-                                if (player1.isLose()) {
-                                    RoundActive = false;
-                                }
-                                else {
-                                    System.out.printf("Choose Your Next Monster : ");
-                                    int nextMonster = scan.nextInt();
-                                    while (player1.getMonsters().get(nextMonster - 1).getStats().getHealthPoint() <= 0) {
-                                        System.out.printf("%s Is Already Fainted Out\n", player1.getMonsters().get(nextMonster - 1).getName());
-                                        System.out.printf("Choose Monster Id : ");
-                                        nextMonster = scan.nextInt();
-                                    }
-                                    Monster newMonster = player1.getMonsters().get(nextMonster - 1);
-                                    player1.setCurrentMonster(newMonster);
-                                    System.out.printf("Go %s!!!\n", player1.getCurrentMonster().getName());
-                                }
-                            }
-                            else {
-                                // Player 1 Move First
+                        if (player1.getCurrentMonster().getIsMoveable() == false || player1.getCurrentMonster().getIsMoveable() == false) {
+                            if (player2.getCurrentMonster().getIsMoveable() == true) {
+                                // Player 1 Move
+                                System.out.printf("%s Cant Move\n", player2.getCurrentMonster().getName());
                                 System.out.printf("%s's %s Attack %s's %s\n", player1.getName(), player1.getCurrentMonster().getName(), 
                                 player2.getName(), player2.getCurrentMonster().getName());
                                 player1.getCurrentMonster().getCurrentMove().applyMove(player1.getCurrentMonster(), player2.getCurrentMonster(), listOfEffectivity);
@@ -720,10 +550,55 @@ public class Main {
                                     }
                                 }
                             }
+                            else if (player1.getCurrentMonster().getIsMoveable() == true) {
+                                // Player 2 Move
+                                System.out.printf("%s's %s Attack %s's %s\n", player2.getName(), player2.getCurrentMonster().getName(), 
+                                player1.getName(), player1.getCurrentMonster().getName());
+                                player2.getCurrentMonster().getCurrentMove().applyMove(player2.getCurrentMonster(), player1.getCurrentMonster(), listOfEffectivity);
+                                if (player2.getCurrentMonster().getStats().getHealthPoint() <= 0) {
+                                    System.out.printf("%s is Fainted Out\n", player2.getCurrentMonster().getName());
+                                    if (player2.isLose()) {
+                                        RoundActive = false;
+                                    }
+                                    else {
+                                        System.out.printf("Choose Your Next Monster : ");
+                                        int nextMonster = scan.nextInt();
+                                        while (player2.getMonsters().get(nextMonster - 1).getStats().getHealthPoint() <= 0) {
+                                            System.out.printf("%s Is Already Fainted Out\n", player2.getMonsters().get(nextMonster - 1).getName());
+                                            System.out.printf("Choose Monster Id : ");
+                                            nextMonster = scan.nextInt();
+                                        }
+                                        Monster newMonster = player2.getMonsters().get(nextMonster - 1);
+                                        player2.setCurrentMonster(newMonster);
+                                        System.out.printf("Go %s!!!\n", player2.getCurrentMonster().getName());
+                                    }
+                                }
+                                else if (player1.getCurrentMonster().getStats().getHealthPoint() <= 0) {
+                                    System.out.printf("%s is Fainted Out\n", player1.getCurrentMonster().getName());
+                                    if (player1.isLose()) {
+                                        RoundActive = false;
+                                    }
+                                    else {
+                                        System.out.printf("Choose Your Next Monster : ");
+                                        int nextMonster = scan.nextInt();
+                                        while (player1.getMonsters().get(nextMonster - 1).getStats().getHealthPoint() <= 0) {
+                                            System.out.printf("%s Is Already Fainted Out\n", player1.getMonsters().get(nextMonster - 1).getName());
+                                            System.out.printf("Choose Monster Id : ");
+                                            nextMonster = scan.nextInt();
+                                        }
+                                        Monster newMonster = player1.getMonsters().get(nextMonster - 1);
+                                        player1.setCurrentMonster(newMonster);
+                                        System.out.printf("Go %s!!!\n", player1.getCurrentMonster().getName());
+                                    }
+                                }
+                            }
+                            else {
+                                System.out.println("Both Monster Cant Move");
+                            }
                         }
                         else {
-                            int firstMove = random.nextInt(2);
-                            if (firstMove == 0) {
+                            // Adu Priority 
+                            if((player1MovePriority > player2MovePriority) || ((player1MovePriority == player2MovePriority) && (player1Speed > player2Speed))) {
                                 // Player 1 Move First
                                 System.out.printf("%s's %s Attack %s's %s\n", player1.getName(), player1.getCurrentMonster().getName(), 
                                                 player2.getName(), player2.getCurrentMonster().getName());
@@ -766,7 +641,7 @@ public class Main {
                                 }
                                 else {
                                     System.out.printf("%s's %s Attack %s's %s\n", player2.getName(), player2.getCurrentMonster().getName(), 
-                                                    player1.getName(), player1.getCurrentMonster().getName());
+                                                player1.getName(), player1.getCurrentMonster().getName());
                                     player2.getCurrentMonster().getCurrentMove().applyMove(player2.getCurrentMonster(), player1.getCurrentMonster(), listOfEffectivity);
                                     if (player2.getCurrentMonster().getStats().getHealthPoint() <= 0) {
                                         System.out.printf("%s is Fainted Out\n", player2.getCurrentMonster().getName());
@@ -806,10 +681,11 @@ public class Main {
                                     }
                                 }
                             }
-                            else {
+                            
+                            else if((player1MovePriority < player2MovePriority) || ((player1MovePriority == player2MovePriority) && (player1Speed < player2Speed))) {
                                 // Player 2 Move
                                 System.out.printf("%s's %s Attack %s's %s\n", player2.getName(), player2.getCurrentMonster().getName(), 
-                                player1.getName(), player1.getCurrentMonster().getName());
+                                                player1.getName(), player1.getCurrentMonster().getName());
                                 player2.getCurrentMonster().getCurrentMove().applyMove(player2.getCurrentMonster(), player1.getCurrentMonster(), listOfEffectivity);
                                 if (player2.getCurrentMonster().getStats().getHealthPoint() <= 0) {
                                     System.out.printf("%s is Fainted Out\n", player2.getCurrentMonster().getName());
@@ -890,93 +766,273 @@ public class Main {
                                     }
                                 }
                             }
+                            else {
+                                int firstMove = random.nextInt(2);
+                                if (firstMove == 0) {
+                                    // Player 1 Move First
+                                    System.out.printf("%s's %s Attack %s's %s\n", player1.getName(), player1.getCurrentMonster().getName(), 
+                                                    player2.getName(), player2.getCurrentMonster().getName());
+                                    player1.getCurrentMonster().getCurrentMove().applyMove(player1.getCurrentMonster(), player2.getCurrentMonster(), listOfEffectivity);
+                                    if (player2.getCurrentMonster().getStats().getHealthPoint() <= 0) {
+                                        System.out.printf("%s is Fainted Out\n", player2.getCurrentMonster().getName());
+                                        if (player2.isLose()) {
+                                            RoundActive = false;
+                                        }
+                                        else {
+                                            System.out.printf("Choose Your Next Monster : ");
+                                            int nextMonster = scan.nextInt();
+                                            while (player2.getMonsters().get(nextMonster - 1).getStats().getHealthPoint() <= 0) {
+                                                System.out.printf("%s Is Already Fainted Out\n", player2.getMonsters().get(nextMonster - 1).getName());
+                                                System.out.printf("Choose Monster Id : ");
+                                                nextMonster = scan.nextInt();
+                                            }
+                                            Monster newMonster = player2.getMonsters().get(nextMonster - 1);
+                                            player2.setCurrentMonster(newMonster);
+                                            System.out.printf("Go %s!!!\n", player2.getCurrentMonster().getName());
+                                        }
+                                    }
+                                    else if (player1.getCurrentMonster().getStats().getHealthPoint() <= 0) {
+                                        System.out.printf("%s is Fainted Out\n", player1.getCurrentMonster().getName());
+                                        if (player1.isLose()) {
+                                            RoundActive = false;
+                                        }
+                                        else {
+                                            System.out.printf("Choose Your Next Monster : ");
+                                            int nextMonster = scan.nextInt();
+                                            while (player1.getMonsters().get(nextMonster - 1).getStats().getHealthPoint() <= 0) {
+                                                System.out.printf("%s Is Already Fainted Out\n", player1.getMonsters().get(nextMonster - 1).getName());
+                                                System.out.printf("Choose Monster Id : ");
+                                                nextMonster = scan.nextInt();
+                                            }
+                                            Monster newMonster = player1.getMonsters().get(nextMonster - 1);
+                                            player1.setCurrentMonster(newMonster);
+                                            System.out.printf("Go %s!!!\n", player1.getCurrentMonster().getName());
+                                        }
+                                    }
+                                    else {
+                                        System.out.printf("%s's %s Attack %s's %s\n", player2.getName(), player2.getCurrentMonster().getName(), 
+                                                        player1.getName(), player1.getCurrentMonster().getName());
+                                        player2.getCurrentMonster().getCurrentMove().applyMove(player2.getCurrentMonster(), player1.getCurrentMonster(), listOfEffectivity);
+                                        if (player2.getCurrentMonster().getStats().getHealthPoint() <= 0) {
+                                            System.out.printf("%s is Fainted Out\n", player2.getCurrentMonster().getName());
+                                            if (player2.isLose()) {
+                                                RoundActive = false;
+                                            }
+                                            else {
+                                                System.out.printf("Choose Your Next Monster : ");
+                                                int nextMonster = scan.nextInt();
+                                                while (player2.getMonsters().get(nextMonster - 1).getStats().getHealthPoint() <= 0) {
+                                                    System.out.printf("%s Is Already Fainted Out\n", player2.getMonsters().get(nextMonster - 1).getName());
+                                                    System.out.printf("Choose Monster Id : ");
+                                                    nextMonster = scan.nextInt();
+                                                }
+                                                Monster newMonster = player2.getMonsters().get(nextMonster - 1);
+                                                player2.setCurrentMonster(newMonster);
+                                                System.out.printf("Go %s!!!\n", player2.getCurrentMonster().getName());
+                                            }
+                                        }
+                                        else if (player1.getCurrentMonster().getStats().getHealthPoint() <= 0) {
+                                            System.out.printf("%s is Fainted Out\n", player1.getCurrentMonster().getName());
+                                            if (player1.isLose()) {
+                                                RoundActive = false;
+                                            }
+                                            else {
+                                                System.out.printf("Choose Your Next Monster : ");
+                                                int nextMonster = scan.nextInt();
+                                                while (player1.getMonsters().get(nextMonster - 1).getStats().getHealthPoint() <= 0) {
+                                                    System.out.printf("%s Is Already Fainted Out\n", player1.getMonsters().get(nextMonster - 1).getName());
+                                                    System.out.printf("Choose Monster Id : ");
+                                                    nextMonster = scan.nextInt();
+                                                }
+                                                Monster newMonster = player1.getMonsters().get(nextMonster - 1);
+                                                player1.setCurrentMonster(newMonster);
+                                                System.out.printf("Go %s!!!\n", player1.getCurrentMonster().getName());
+                                            }
+                                        }
+                                    }
+                                }
+                                else {
+                                    // Player 2 Move
+                                    System.out.printf("%s's %s Attack %s's %s\n", player2.getName(), player2.getCurrentMonster().getName(), 
+                                    player1.getName(), player1.getCurrentMonster().getName());
+                                    player2.getCurrentMonster().getCurrentMove().applyMove(player2.getCurrentMonster(), player1.getCurrentMonster(), listOfEffectivity);
+                                    if (player2.getCurrentMonster().getStats().getHealthPoint() <= 0) {
+                                        System.out.printf("%s is Fainted Out\n", player2.getCurrentMonster().getName());
+                                        if (player2.isLose()) {
+                                            RoundActive = false;
+                                        }
+                                        else {
+                                            System.out.printf("Choose Your Next Monster : ");
+                                            int nextMonster = scan.nextInt();
+                                            while (player2.getMonsters().get(nextMonster - 1).getStats().getHealthPoint() <= 0) {
+                                                System.out.printf("%s Is Already Fainted Out\n", player2.getMonsters().get(nextMonster - 1).getName());
+                                                System.out.printf("Choose Monster Id : ");
+                                                nextMonster = scan.nextInt();
+                                            }
+                                            Monster newMonster = player2.getMonsters().get(nextMonster - 1);
+                                            player2.setCurrentMonster(newMonster);
+                                            System.out.printf("Go %s!!!\n", player2.getCurrentMonster().getName());
+                                        }
+                                    }
+                                    else if (player1.getCurrentMonster().getStats().getHealthPoint() <= 0) {
+                                        System.out.printf("%s is Fainted Out\n", player1.getCurrentMonster().getName());
+                                        if (player1.isLose()) {
+                                            RoundActive = false;
+                                        }
+                                        else {
+                                            System.out.printf("Choose Your Next Monster : ");
+                                            int nextMonster = scan.nextInt();
+                                            while (player1.getMonsters().get(nextMonster - 1).getStats().getHealthPoint() <= 0) {
+                                                System.out.printf("%s Is Already Fainted Out\n", player1.getMonsters().get(nextMonster - 1).getName());
+                                                System.out.printf("Choose Monster Id : ");
+                                                nextMonster = scan.nextInt();
+                                            }
+                                            Monster newMonster = player1.getMonsters().get(nextMonster - 1);
+                                            player1.setCurrentMonster(newMonster);
+                                            System.out.printf("Go %s!!!\n", player1.getCurrentMonster().getName());
+                                        }
+                                    }
+                                    else {
+                                        // Player 1 Move First
+                                        System.out.printf("%s's %s Attack %s's %s\n", player1.getName(), player1.getCurrentMonster().getName(), 
+                                        player2.getName(), player2.getCurrentMonster().getName());
+                                        player1.getCurrentMonster().getCurrentMove().applyMove(player1.getCurrentMonster(), player2.getCurrentMonster(), listOfEffectivity);
+                                        if (player2.getCurrentMonster().getStats().getHealthPoint() <= 0) {
+                                            System.out.printf("%s is Fainted Out\n", player2.getCurrentMonster().getName());
+                                            if (player2.isLose()) {
+                                                RoundActive = false;
+                                            }
+                                            else {
+                                                System.out.printf("Choose Your Next Monster : ");
+                                                int nextMonster = scan.nextInt();
+                                                while (player2.getMonsters().get(nextMonster - 1).getStats().getHealthPoint() <= 0) {
+                                                    System.out.printf("%s Is Already Fainted Out\n", player2.getMonsters().get(nextMonster - 1).getName());
+                                                    System.out.printf("Choose Monster Id : ");
+                                                    nextMonster = scan.nextInt();
+                                                }
+                                                Monster newMonster = player2.getMonsters().get(nextMonster - 1);
+                                                player2.setCurrentMonster(newMonster);
+                                                System.out.printf("Go %s!!!\n", player2.getCurrentMonster().getName());
+                                            }
+                                        }
+                                        else if (player1.getCurrentMonster().getStats().getHealthPoint() <= 0) {
+                                            System.out.printf("%s is Fainted Out\n", player1.getCurrentMonster().getName());
+                                            if (player1.isLose()) {
+                                                RoundActive = false;
+                                            }
+                                            else {
+                                                System.out.printf("Choose Your Next Monster : ");
+                                                int nextMonster = scan.nextInt();
+                                                while (player1.getMonsters().get(nextMonster - 1).getStats().getHealthPoint() <= 0) {
+                                                    System.out.printf("%s Is Already Fainted Out\n", player1.getMonsters().get(nextMonster - 1).getName());
+                                                    System.out.printf("Choose Monster Id : ");
+                                                    nextMonster = scan.nextInt();
+                                                }
+                                                Monster newMonster = player1.getMonsters().get(nextMonster - 1);
+                                                player1.setCurrentMonster(newMonster);
+                                                System.out.printf("Go %s!!!\n", player1.getCurrentMonster().getName());
+                                            }
+                                        }
+                                    }
+                                }
+                            }
                         }
                     }
 
                     else if ((input1 == 1) && (input2 == 2)) {
-                        // Player 1 Move
-                        System.out.printf("%s's %s Attack %s's %s\n", player1.getName(), player1.getCurrentMonster().getName(), 
-                        player2.getName(), player2.getCurrentMonster().getName());
-                        player1.getCurrentMonster().getCurrentMove().applyMove(player1.getCurrentMonster(), player2.getCurrentMonster(), listOfEffectivity);
-                        if (player2.getCurrentMonster().getStats().getHealthPoint() <= 0) {
-                            System.out.printf("%s is Fainted Out\n", player2.getCurrentMonster().getName());
-                            if (player2.isLose()) {
-                                RoundActive = false;
-                            }
-                            else {
-                                System.out.printf("Choose Your Next Monster : ");
-                                int nextMonster = scan.nextInt();
-                                while (player2.getMonsters().get(nextMonster - 1).getStats().getHealthPoint() <= 0) {
-                                    System.out.printf("%s Is Already Fainted Out\n", player2.getMonsters().get(nextMonster - 1).getName());
-                                    System.out.printf("Choose Monster Id : ");
-                                    nextMonster = scan.nextInt();
+                        if (player1.getCurrentMonster().getIsMoveable() == false) {
+                            // Player 1 Move
+                            System.out.printf("%s's %s Attack %s's %s\n", player1.getName(), player1.getCurrentMonster().getName(), 
+                            player2.getName(), player2.getCurrentMonster().getName());
+                            player1.getCurrentMonster().getCurrentMove().applyMove(player1.getCurrentMonster(), player2.getCurrentMonster(), listOfEffectivity);
+                            if (player2.getCurrentMonster().getStats().getHealthPoint() <= 0) {
+                                System.out.printf("%s is Fainted Out\n", player2.getCurrentMonster().getName());
+                                if (player2.isLose()) {
+                                    RoundActive = false;
                                 }
-                                Monster newMonster = player2.getMonsters().get(nextMonster - 1);
-                                player2.setCurrentMonster(newMonster);
-                                System.out.printf("Go %s!!!\n", player2.getCurrentMonster().getName());
+                                else {
+                                    System.out.printf("Choose Your Next Monster : ");
+                                    int nextMonster = scan.nextInt();
+                                    while (player2.getMonsters().get(nextMonster - 1).getStats().getHealthPoint() <= 0) {
+                                        System.out.printf("%s Is Already Fainted Out\n", player2.getMonsters().get(nextMonster - 1).getName());
+                                        System.out.printf("Choose Monster Id : ");
+                                        nextMonster = scan.nextInt();
+                                    }
+                                    Monster newMonster = player2.getMonsters().get(nextMonster - 1);
+                                    player2.setCurrentMonster(newMonster);
+                                    System.out.printf("Go %s!!!\n", player2.getCurrentMonster().getName());
+                                }
+                            }
+                            else if (player1.getCurrentMonster().getStats().getHealthPoint() <= 0) {
+                                System.out.printf("%s is Fainted Out\n", player1.getCurrentMonster().getName());
+                                if (player1.isLose()) {
+                                    RoundActive = false;
+                                }
+                                else {
+                                    System.out.printf("Choose Your Next Monster : ");
+                                    int nextMonster = scan.nextInt();
+                                    while (player1.getMonsters().get(nextMonster - 1).getStats().getHealthPoint() <= 0) {
+                                        System.out.printf("%s Is Already Fainted Out\n", player1.getMonsters().get(nextMonster - 1).getName());
+                                        System.out.printf("Choose Monster Id : ");
+                                        nextMonster = scan.nextInt();
+                                    }
+                                    Monster newMonster = player1.getMonsters().get(nextMonster - 1);
+                                    player1.setCurrentMonster(newMonster);
+                                    System.out.printf("Go %s!!!\n", player1.getCurrentMonster().getName());
+                                }
                             }
                         }
-                        else if (player1.getCurrentMonster().getStats().getHealthPoint() <= 0) {
-                            System.out.printf("%s is Fainted Out\n", player1.getCurrentMonster().getName());
-                            if (player1.isLose()) {
-                                RoundActive = false;
-                            }
-                            else {
-                                System.out.printf("Choose Your Next Monster : ");
-                                int nextMonster = scan.nextInt();
-                                while (player1.getMonsters().get(nextMonster - 1).getStats().getHealthPoint() <= 0) {
-                                    System.out.printf("%s Is Already Fainted Out\n", player1.getMonsters().get(nextMonster - 1).getName());
-                                    System.out.printf("Choose Monster Id : ");
-                                    nextMonster = scan.nextInt();
-                                }
-                                Monster newMonster = player1.getMonsters().get(nextMonster - 1);
-                                player1.setCurrentMonster(newMonster);
-                                System.out.printf("Go %s!!!\n", player1.getCurrentMonster().getName());
-                            }
+                        else {
+                            System.out.println("Player 1's Monster Cant Move");
                         }
                     }
 
                     else if ((input1 == 2) && (input2 == 1)) {
-                        // Player 2 Move
-                        System.out.printf("%s's %s Attack %s's %s\n", player2.getName(), player2.getCurrentMonster().getName(), 
-                        player1.getName(), player1.getCurrentMonster().getName());
-                        player2.getCurrentMonster().getCurrentMove().applyMove(player2.getCurrentMonster(), player1.getCurrentMonster(), listOfEffectivity);
-                        if (player2.getCurrentMonster().getStats().getHealthPoint() <= 0) {
-                            System.out.printf("%s is Fainted Out\n", player2.getCurrentMonster().getName());
-                            if (player2.isLose()) {
-                                RoundActive = false;
-                            }
-                            else {
-                                System.out.printf("Choose Your Next Monster : ");
-                                int nextMonster = scan.nextInt();
-                                while (player2.getMonsters().get(nextMonster - 1).getStats().getHealthPoint() <= 0) {
-                                    System.out.printf("%s Is Already Fainted Out\n", player2.getMonsters().get(nextMonster - 1).getName());
-                                    System.out.printf("Choose Monster Id : ");
-                                    nextMonster = scan.nextInt();
+                        if (player2.getCurrentMonster().getIsMoveable() ==  false) {
+                            // Player 2 Move
+                            System.out.printf("%s's %s Attack %s's %s\n", player2.getName(), player2.getCurrentMonster().getName(), 
+                            player1.getName(), player1.getCurrentMonster().getName());
+                            player2.getCurrentMonster().getCurrentMove().applyMove(player2.getCurrentMonster(), player1.getCurrentMonster(), listOfEffectivity);
+                            if (player2.getCurrentMonster().getStats().getHealthPoint() <= 0) {
+                                System.out.printf("%s is Fainted Out\n", player2.getCurrentMonster().getName());
+                                if (player2.isLose()) {
+                                    RoundActive = false;
                                 }
-                                Monster newMonster = player2.getMonsters().get(nextMonster - 1);
-                                player2.setCurrentMonster(newMonster);
-                                System.out.printf("Go %s!!!\n", player2.getCurrentMonster().getName());
+                                else {
+                                    System.out.printf("Choose Your Next Monster : ");
+                                    int nextMonster = scan.nextInt();
+                                    while (player2.getMonsters().get(nextMonster - 1).getStats().getHealthPoint() <= 0) {
+                                        System.out.printf("%s Is Already Fainted Out\n", player2.getMonsters().get(nextMonster - 1).getName());
+                                        System.out.printf("Choose Monster Id : ");
+                                        nextMonster = scan.nextInt();
+                                    }
+                                    Monster newMonster = player2.getMonsters().get(nextMonster - 1);
+                                    player2.setCurrentMonster(newMonster);
+                                    System.out.printf("Go %s!!!\n", player2.getCurrentMonster().getName());
+                                }
                             }
+                            else if (player1.getCurrentMonster().getStats().getHealthPoint() <= 0) {
+                                System.out.printf("%s is Fainted Out\n", player1.getCurrentMonster().getName());
+                                if (player1.isLose()) {
+                                    RoundActive = false;
+                                }
+                                else {
+                                    System.out.printf("Choose Your Next Monster : ");
+                                    int nextMonster = scan.nextInt();
+                                    while (player1.getMonsters().get(nextMonster - 1).getStats().getHealthPoint() <= 0) {
+                                        System.out.printf("%s Is Already Fainted Out\n", player1.getMonsters().get(nextMonster - 1).getName());
+                                        System.out.printf("Choose Monster Id : ");
+                                        nextMonster = scan.nextInt();
+                                    }
+                                    Monster newMonster = player1.getMonsters().get(nextMonster - 1);
+                                    player1.setCurrentMonster(newMonster);
+                                    System.out.printf("Go %s!!!\n", player1.getCurrentMonster().getName());
+                                }
+                            }  
                         }
-                        else if (player1.getCurrentMonster().getStats().getHealthPoint() <= 0) {
-                            System.out.printf("%s is Fainted Out\n", player1.getCurrentMonster().getName());
-                            if (player1.isLose()) {
-                                RoundActive = false;
-                            }
-                            else {
-                                System.out.printf("Choose Your Next Monster : ");
-                                int nextMonster = scan.nextInt();
-                                while (player1.getMonsters().get(nextMonster - 1).getStats().getHealthPoint() <= 0) {
-                                    System.out.printf("%s Is Already Fainted Out\n", player1.getMonsters().get(nextMonster - 1).getName());
-                                    System.out.printf("Choose Monster Id : ");
-                                    nextMonster = scan.nextInt();
-                                }
-                                Monster newMonster = player1.getMonsters().get(nextMonster - 1);
-                                player1.setCurrentMonster(newMonster);
-                                System.out.printf("Go %s!!!\n", player1.getCurrentMonster().getName());
-                            }
-                        }  
+                        else {
+                            System.out.println("Player 2's Monster Cant Move");
+                        }
                     }
                     else {
                         System.out.println("Both Players Switched Their Monster");
@@ -998,19 +1054,20 @@ public class Main {
                 if (back.equals("BACK")){
                     Interface.newGame();
                     Interface.menuDisplay();
-                    input = scan.nextLine();
                     }
                 }
+            
             else if(input.equals("EXIT GAME")){
-                Interface.newGame();
-                System.out.print("\033[H\033[2J");
-                System.out.flush();
                 GameActive = false; 
-                }
-            else{
+            }
+            else {
                 System.out.println("\nInput salah, mohon ulangi");
+                Interface.menuDisplay();
             }
         }
         scan.close();
+        Interface.newGame();
+        System.out.print("\033[H\033[2J");
+        System.out.flush();
     }
 }

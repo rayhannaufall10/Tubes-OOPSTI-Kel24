@@ -179,8 +179,8 @@ public class Main {
             System.out.println("Failed to Load Effectivity...");
         }
 
-        //Interface.loadingGame();
-        //Interface.newGame();
+        Interface.loadingGame();
+        Interface.newGame();
         Interface.menuDisplay();
 
         boolean GameActive = true;

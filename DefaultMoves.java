@@ -49,7 +49,6 @@ public class DefaultMoves extends Move{
             // Self
             Stats ourMonsterStats = ourMonster.getStats();
             double updateOwnHP = Math.floor(ourMonsterStats.getMaxHealth() * 1 / 4);
-            System.out.println(updateOwnHP);
             double MonsterHealth = ourMonsterStats.getHealthPoint();
             double currentHealth = MonsterHealth - updateOwnHP;
             ourMonsterStats.setHealthPoint(currentHealth);

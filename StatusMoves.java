@@ -15,7 +15,7 @@ public class StatusMoves extends Move {
     public void applyMove(Monster ourMonster, Monster enemyMonster, Effectivity effectivity){
         double randomAccuracy =  1 + (int)(Math.random() * ((100 - 1) + 1));
         if (randomAccuracy > super.getAccuracy()){
-            System.out.printf("%s Attack Missed...", ourMonster.getName());
+            System.out.printf("%s Attack Missed...\n", ourMonster.getName());
         }
         else {
             if (this.getTarget().equals("OWN")){
@@ -23,23 +23,25 @@ public class StatusMoves extends Move {
                 currentHP += this.EffectPoint[0];
                 ourMonster.getStats().setHealthPoint(currentHP);
             }
-            else{
-                if (Effect.equals("BURN")){
-                    enemyMonster.setStatusCondition(StatusCondition.BURN);
-                }
-                if (Effect.equals("POISON")){
-                    enemyMonster.setStatusCondition(StatusCondition.POISON);
-                }
-                if (Effect.equals("PARALYZE")){
-                    enemyMonster.setStatusCondition(StatusCondition.PARALYZE);
-                    double currentSpeed = enemyMonster.getStats().getSpeed();
-                    enemyMonster.getStats().setSpeed(currentSpeed * 0.5);
-                }
-                if (Effect.equals("SLEEP")){
-                    int sleep = random.nextInt(7);
-                    enemyMonster.setStatusCondition(StatusCondition.SLEEP);
-                    enemyMonster.setSleepTime(sleep + 1);
-                    enemyMonster.setIsMoveable(false);
+            else {
+                if (enemyMonster.getStatusCondition() == StatusCondition.NONE) {
+                    if (Effect.equals("BURN")){
+                        enemyMonster.setStatusCondition(StatusCondition.BURN);
+                    }
+                    if (Effect.equals("POISON")){
+                        enemyMonster.setStatusCondition(StatusCondition.POISON);
+                    }
+                    if (Effect.equals("PARALYZE")){
+                        enemyMonster.setStatusCondition(StatusCondition.PARALYZE);
+                        double currentSpeed = enemyMonster.getStats().getSpeed();
+                        enemyMonster.getStats().setSpeed(currentSpeed * 0.5);
+                    }
+                    if (Effect.equals("SLEEP")){
+                        int sleep = random.nextInt(7);
+                        enemyMonster.setStatusCondition(StatusCondition.SLEEP);
+                        enemyMonster.setSleepTime(sleep + 1);
+                        enemyMonster.setIsMoveable(false);
+                    }
                 }
             }
         }

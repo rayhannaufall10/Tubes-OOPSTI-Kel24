@@ -27,8 +27,13 @@ public class Stats{
         return maxHealthPoint;
     }
     
-    public void setHealthPoint(double healthPoint){
-    	this.healthPoint  = healthPoint;
+    public void setHealthPoint(double healthPoint) {
+        if (healthPoint >= maxHealthPoint) {
+            this.healthPoint = maxHealthPoint;
+        }
+        else {
+            this.healthPoint = healthPoint;
+        }
     }
 
     public double getAttack(){

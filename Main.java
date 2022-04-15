@@ -179,8 +179,8 @@ public class Main {
             System.out.println("Failed to Load Effectivity...");
         }
 
-        Interface.loadingGame();
-        Interface.newGame();
+        //Interface.loadingGame();
+        //Interface.newGame();
         Interface.menuDisplay();
 
         boolean GameActive = true;
@@ -257,93 +257,96 @@ public class Main {
 
                 while (RoundActive) {
                     countRound++;
-                    
-                    // Check Monster Status Condition Burn
-                    if (player1.getCurrentMonster().getStatusCondition() == StatusCondition.BURN) {
-                        System.out.printf("%s Terkena Efek Burn\n", player1.getCurrentMonster().getName());
-                        double newHealth1 = (player1.getCurrentMonster().getStats().getHealthPoint()) 
-                                           - (player1.getCurrentMonster().getStats().getMaxHealth() * 1/8);
-                        player1.getCurrentMonster().getStats().setHealthPoint(newHealth1);
-                    }
-                    else if (player2.getCurrentMonster().getStatusCondition() == StatusCondition.BURN) {
-                        System.out.printf("%s Terkena Efek Burn\n", player2.getCurrentMonster().getName());
-                        double newHealth2 = (player2.getCurrentMonster().getStats().getHealthPoint()) 
-                                           - (player2.getCurrentMonster().getStats().getMaxHealth() * 1/8);
-                        player2.getCurrentMonster().getStats().setHealthPoint(newHealth2);
-                    }
-                    
-                    // Check Monster Status Condition Poison
-                    else if (player1.getCurrentMonster().getStatusCondition() == StatusCondition.POISON) {
-                        System.out.printf("%s Terkena Efek Poison\n", player1.getCurrentMonster().getName());
-                        double newHealth1 = (player1.getCurrentMonster().getStats().getHealthPoint()) 
-                                           - (player1.getCurrentMonster().getStats().getMaxHealth() * 1/16);
-                        player1.getCurrentMonster().getStats().setHealthPoint(newHealth1);
-                    }
-                    else if (player2.getCurrentMonster().getStatusCondition() == StatusCondition.POISON) {
-                        System.out.printf("%s Terkena Efek Poison\n", player2.getCurrentMonster().getName());
-                        double newHealth2 = (player2.getCurrentMonster().getStats().getHealthPoint()) 
-                                           - (player2.getCurrentMonster().getStats().getMaxHealth() * 1/16);
-                        player2.getCurrentMonster().getStats().setHealthPoint(newHealth2);
-                    }
-
-                    // Check Monster Status Condition Paralyze 
-                    else if (player1.getCurrentMonster().getStatusCondition() == StatusCondition.PARALYZE) {
-                        int chanceParalyze1 = random.nextInt(4);
-                        if (chanceParalyze1 == 1) {
-                            player1.getCurrentMonster().setIsMoveable(false);
+                    // Check Status Condition Monster Player 1
+                    for (Monster mons1 : player2Monster) {
+                        if (mons1.getStatusCondition() == StatusCondition.BURN) {
+                            System.out.printf("%s Terkena Efek Burn\n", mons1.getName());
+                            double newHealth2 = (mons1.getStats().getHealthPoint()) 
+                                               - (mons1.getStats().getMaxHealth() * 1/8);
+                            mons1.getStats().setHealthPoint(newHealth2);
                         }
-                        else{
-                            // Then IsMoveable = true
-                            continue;
+                        else if (mons1.getStatusCondition() == StatusCondition.POISON) {
+                            System.out.printf("%s Terkena Efek Burn\n", mons1.getName());
+                            double newHealth2 = (mons1.getStats().getHealthPoint()) 
+                                               - (mons1.getStats().getMaxHealth() * 1/16);
+                            mons1.getStats().setHealthPoint(newHealth2);
                         }
-                    }
-                    else if (player2.getCurrentMonster().getStatusCondition() == StatusCondition.PARALYZE) {
-                        int chanceParalyze2 = random.nextInt(4);
-                        if (chanceParalyze2 == 1) {
-                            player2.getCurrentMonster().setIsMoveable(false);
+                        else if (mons1.getStatusCondition() == StatusCondition.PARALYZE) {
+                            int chanceParalyze1 = random.nextInt(4);
+                            if (chanceParalyze1 == 1) {
+                                mons1.setIsMoveable(false);
+                            }
+                            else{
+                                // Then IsMoveable = true
+                                continue;
+                            }
                         }
-                        else{
-                            // Then IsMoveable = true
-                            continue;
-                        }
-                    }
-
-                    // Check Monster Status Condition Sleep
-                    if(countRound == 1) {
-                        continue;
-                    } 
-                    else {
-                        for (Monster monster1 : player1Monster) {
-                            if (monster1.getStats().getHealthPoint() > 0) {
-                                monster1.setSleepTime(monster1.getSleepTime() - 1);
-                                if (monster1.getSleepTime() <= 0) {
-                                    if (monster1.getStatusCondition() == StatusCondition.SLEEP) {
-                                        System.out.printf("%s Woke Up\n", monster1.getName());
-                                        monster1.setStatusCondition(StatusCondition.NONE);
+                        else if (mons1.getStatusCondition() == StatusCondition.SLEEP) {
+                            if (countRound == 1) {
+                                continue;
+                            }
+                            else {
+                                if (mons1.getStats().getHealthPoint() > 0) {
+                                    mons1.setSleepTime(mons1.getSleepTime() - 1);
+                                    if (mons1.getSleepTime() <= 0) {
+                                        if (mons1.getStatusCondition() == StatusCondition.SLEEP) {
+                                            System.out.printf("%s Woke Up\n", mons1.getName());
+                                            mons1.setStatusCondition(StatusCondition.NONE);
+                                        }
+                                        else {
+                                            continue;
+                                        }
                                     }
-                                    else {
-                                        continue;
+                                    else{
+                                        System.out.printf("%s Is Still In A Deep Sleep\n", mons1.getName());
                                     }
-                                }
-                                else{
-                                    System.out.printf("%s Is Still In A Deep Sleep\n", monster1.getName());
                                 }
                             }
                         }
-                        for (Monster monster2 : player2Monster) {
-                            if (monster2.getStats().getHealthPoint() > 0) {
-                                monster2.setSleepTime(monster2.getSleepTime() - 1);
-                                if (monster2.getSleepTime() <= 0) {
-                                    if (monster2.getStatusCondition() == StatusCondition.SLEEP) {
-                                        System.out.printf("%s Woke Up\n", monster2.getName());
-                                        monster2.setStatusCondition(StatusCondition.NONE);
+                    }
+                    // Check Status Condition Monster Player 2
+                    for (Monster mons2 : player1Monster) {
+                        if (mons2.getStatusCondition() == StatusCondition.BURN) {
+                            System.out.printf("%s Terkena Efek Burn\n", mons2.getName());
+                            double newHealth1 = (mons2.getStats().getHealthPoint()) 
+                                               - (mons2.getStats().getMaxHealth() * 1/8);
+                            mons2.getStats().setHealthPoint(newHealth1);
+                        }
+                        else if (mons2.getStatusCondition() == StatusCondition.POISON) {
+                            System.out.printf("%s Terkena Efek Burn\n", mons2.getName());
+                            double newHealth1 = (mons2.getStats().getHealthPoint()) 
+                                               - (mons2.getStats().getMaxHealth() * 1/16);
+                            mons2.getStats().setHealthPoint(newHealth1);
+                        }
+                        else if (mons2.getStatusCondition() == StatusCondition.PARALYZE) {
+                            int chanceParalyze1 = random.nextInt(4);
+                            if (chanceParalyze1 == 1) {
+                                mons2.setIsMoveable(false);
+                            }
+                            else{
+                                // Then IsMoveable = true
+                                continue;
+                            }
+                        }
+                        else if (mons2.getStatusCondition() == StatusCondition.SLEEP) {
+                            if (countRound == 1) {
+                                continue;
+                            }
+                            else {
+                                if (mons2.getStats().getHealthPoint() > 0) {
+                                    mons2.setSleepTime(mons2.getSleepTime() - 1);
+                                    if (mons2.getSleepTime() <= 0) {
+                                        if (mons2.getStatusCondition() == StatusCondition.SLEEP) {
+                                            System.out.printf("%s Woke Up\n", mons2.getName());
+                                            mons2.setStatusCondition(StatusCondition.NONE);
+                                        }
+                                        else {
+                                            continue;
+                                        }
                                     }
-                                    else {
-                                        continue;
+                                    else{
+                                        System.out.printf("%s Is Still In A Deep Sleep\n", mons2.getName());
                                     }
-                                }
-                                else{
-                                    System.out.printf("%s Still In A Deep Sleep\n", monster2.getName());
                                 }
                             }
                         }
@@ -387,7 +390,7 @@ public class Main {
                         else if (input1 == 2) {
                             boolean isGanti = true;
                             while (isGanti) {
-                                player1.printMonsters();
+                                player1.printMonstersName();
                                 System.out.printf("Switch Monster To : ");
                                 int ganti = scan.nextInt();
                                 if ((ganti > 6) || (ganti <= 0)){
@@ -399,6 +402,7 @@ public class Main {
                                     }
                                     else{
                                         player1.setCurrentMonster(player1.getMonsters().get(ganti-1));
+                                        System.out.printf("Go %s\n", player1.getCurrentMonster().getName());
                                         isGanti = false;
                                     }
                                 }
@@ -411,6 +415,7 @@ public class Main {
                         }
                         else if (input1 == 4) {
                             String playMonster = player1.getCurrentMonster().getName();
+                            System.out.printf("Sekarang Giliran %s\n", player1.getName());
                             System.out.printf("Monster yang sedang bertarung adalah %s\n", playMonster);
                             System.out.println("Ini adalah list monster yang tersisa : ");
                             int id = 0;
@@ -473,6 +478,7 @@ public class Main {
                                     }
                                     else{
                                         player2.setCurrentMonster(player2.getMonsters().get(ganti-1));
+                                        System.out.printf("Go %s!!!\n", player2.getCurrentMonster().getName());
                                         isGanti = false;
                                     }
                                 }
@@ -485,6 +491,7 @@ public class Main {
                         }
                         else if (input2 == 4){
                             String playMonster = player2.getCurrentMonster().getName();
+                            System.out.printf("Sekarang Giliran %s", player2.getName());
                             System.out.printf("Monster yang sedang bertarung adalah %s\n", playMonster);
                             System.out.println("Ini adalah list monster yang tersisa : ");
                             int id = 0;
@@ -940,7 +947,7 @@ public class Main {
                     }
 
                     else if ((input1 == 1) && (input2 == 2)) {
-                        if (player1.getCurrentMonster().getIsMoveable() == false) {
+                        if (player1.getCurrentMonster().getIsMoveable() == true) {
                             // Player 1 Move
                             System.out.printf("%s's %s Attack %s's %s\n", player1.getName(), player1.getCurrentMonster().getName(), 
                             player2.getName(), player2.getCurrentMonster().getName());
@@ -988,7 +995,7 @@ public class Main {
                     }
 
                     else if ((input1 == 2) && (input2 == 1)) {
-                        if (player2.getCurrentMonster().getIsMoveable() ==  false) {
+                        if (player2.getCurrentMonster().getIsMoveable() ==  true) {
                             // Player 2 Move
                             System.out.printf("%s's %s Attack %s's %s\n", player2.getName(), player2.getCurrentMonster().getName(), 
                             player1.getName(), player1.getCurrentMonster().getName());

@@ -4,7 +4,6 @@ Monster Saku is An Adapted CLI Game From Pokemon. Basically it's a 2 player PvP 
 Each Monster are randomly obtained by the system and have a different abbilities and elements.
 ### Made With Love By : 
 
-- 18216016 Devin Adam Sanubari
 - 18220016 Salsabila Asyifa Shalehah
 - 18220048 Rayhan Naufal Luthfi
 - 18220080 Vito Christian Samudra

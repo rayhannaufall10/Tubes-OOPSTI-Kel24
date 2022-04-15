@@ -100,4 +100,13 @@ public class Monster {
     public Move getCurrentMove() {
         return this.currentMove;
     }
+
+    public void printMove() {
+        int id = 0;
+        System.out.println("\n*** \033[1;33mAvailable Monsters\033[0m ***");
+        for (Move move : moves) {
+            System.out.println("(" + String.valueOf(id + 1) + ") " + move.getName());
+            id++;
+        }
+    }
 }

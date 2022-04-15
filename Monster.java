@@ -24,6 +24,19 @@ public class Monster {
         this.isMoveable = true;
     }
 
+    public Monster(Monster m) {
+        this.id = m.getId();
+        this.name = m.getName();
+        this.elementTypes = m.getElementType();
+        this.moves = m.getMoves();
+        this.statusCondition = m.getStatusCondition();
+        this.sleepTime = 0;
+        this.isMoveable = true;
+        Stats currStats = m.getStats();
+        Stats newStats = new Stats(currStats.getHealthPoint(), currStats.getAttack(), currStats.getDefense(), currStats.getSpecialAttack(), currStats.getSpecialDefense(), currStats.getSpeed());
+        this.baseStats = newStats;
+    }
+
     public int getId() {
         return id;
     }

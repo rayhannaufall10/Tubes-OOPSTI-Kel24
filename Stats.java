@@ -28,6 +28,9 @@ public class Stats{
     }
     
     public void setHealthPoint(double healthPoint) {
+        if (healthPoint < 0) {
+            healthPoint = 0;
+        }
         if (healthPoint >= maxHealthPoint) {
             this.healthPoint = maxHealthPoint;
         }

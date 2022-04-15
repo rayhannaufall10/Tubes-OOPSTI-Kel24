@@ -69,6 +69,21 @@ public class Player {
         }
     }
 
+    public void printAliveMonster() {
+        System.out.println("\n*** \033[1;33mALIVE MONSTER\033[0m ***");
+        System.out.println("---------------------------");
+        int i = 1;
+        for (Monster monster : monsterList){
+            if (monster.getStats().getHealthPoint() > 0 ) {
+            System.out.println("(" + i + ") " + monster.getName());
+            } else {
+                System.out.println("(" + i + ") " + monster.getName() + " \033[1;31mDIED\033[0m");
+            }
+            i++;
+        }
+        System.out.println("---------------------------");
+    }
+
     public void printMonstersName() {
         int id = 0;
         System.out.println("\n*** \033[1;33mAvailable Monsters\033[0m ***");

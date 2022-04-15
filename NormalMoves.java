@@ -15,7 +15,7 @@ public class NormalMoves extends Move {
         else {
             // Menghitung Effectivity Type
             double efective = 1.00;    
-            for (int i = 0; i < ourMonster.getElementType().size(); i++){
+            for (int i = 0; i < enemyMonster.getElementType().size(); i++){
                     ElementEffectivityKey effectivityTemp = new ElementEffectivityKey(super.getType(), enemyMonster.getElementType().get(i));
                     efective = efective * Effectivity.getEffectivity(effectivityTemp);
             }
